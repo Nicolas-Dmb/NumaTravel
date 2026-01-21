@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        cormorant: ["Cormorant", "serif"],
+        delicious: ["Delicious", "sans-serif"],
+        poppins: ["Poppins", "cursive"],
+
+      },
+    },
   },
   plugins: [],
 }
