@@ -81,18 +81,14 @@ export default function App() {
   const target = useMemo(() => new Date("2026-01-23T18:00:00Z"), []);
 
   const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(() => getTimeLeft(target));
-  const [spark, setSpark] = useState(0);
 
   useEffect(() => {
     const t = setInterval(() => {
       setTimeLeft(getTimeLeft(target));
-      setSpark((s) => (s + 1) % 1000);
     }, 1000);
     return () => clearInterval(t);
   }, [target]);
 
-  const totalWindowMs = 1000 * 60 * 60 * 24 * 7; // barre “sur 7 jours”, juste pour le fun
-  const progress = timeLeft ? Math.max(0, Math.min(1, 1 - timeLeft.totalMs / totalWindowMs)) : 1;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-200 via-rose-100 to-purple-200">
