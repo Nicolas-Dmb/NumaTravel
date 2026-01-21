@@ -1,3 +1,4 @@
+import logo from './assets/images/logo.svg'
 
 function App() {
 
@@ -6,6 +7,7 @@ function App() {
       <h1 className="text-xl font-bold underline">
         Hello Tailwind 👋
       </h1>
+      <img src={logo} alt="NumaTravel Logo" className="h-16 w-16"/>
     </div>
   )
 }
