@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        numa: {
+          white: "#ebe6e2",
+          red: "#bf5846",
+          black: "#3a3335",
+        },
+      },
       fontFamily: {
         cormorant: ["Cormorant", "serif"],
         delicious: ["Delicious", "sans-serif"],
