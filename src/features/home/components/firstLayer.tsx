@@ -14,6 +14,7 @@ export default function FirstLayer(){
                 <h3 className="text-[22px] mb-2 font-delicious font-bold">DISCOVER</h3>
                 <h1 className="text-[40px] lg:text-[70px] xl:text-[92.8px] mb-4 font-poppins">NUMA TRAVEL</h1>
                 <p className="text-[24px] font-cormorant">TRAVEL PLANNER</p>
+                <button className="border border-white mt-6 px-14 pb-3 py-2 font-delicious text-white rounded hover:bg-gray-700/30 transition">EXPLORE</button>
             </div>
         </div>
     )
