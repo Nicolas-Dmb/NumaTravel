@@ -1,11 +1,11 @@
 import logo from '../assets/logo.svg';
+import video from '../assets/video.webm';
+
 export default function FirstLayer(){
     return (
         <div>
             <video autoPlay muted loop playsInline className="absolute top-0 left-0 w-full h-full object-cover">
-                <source src="/video.webm" type="video/webm" />
-                <source src="/video.web.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
+                <source src={video} type="video/webm" />
             </video>
             <div className="absolute top-0 right-0 p-4 z-20">
                 <img src={logo} alt="Numa Travel Logo" className="w-20 h-20 lg:w-32 lg:h-32 xl:w-48 xl:h-48" />
