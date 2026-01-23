@@ -1,15 +1,41 @@
+import { useEffect, useRef } from 'react';
 import logo from '../assets/logo.svg';
 import video from '../assets/video.webm';
 
 export default function FirstLayer(){
+    const sectionRef = useRef<HTMLElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        const el = sectionRef.current;
+        const v = videoRef.current;
+        if (!el || !v) return;
+
+        const io = new IntersectionObserver(
+        ([entry]) => {
+            if (entry.isIntersecting) {
+            v.play().catch(() => {});
+            } else {
+            v.pause();
+            v.currentTime = 0;
+            }
+        },
+        { threshold: 0.3 }
+        );
+
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
     return (
-    <section className="relative h-screen overflow-hidden">
+    <section ref={sectionRef} className="relative h-screen overflow-hidden">
         <video
+            ref={videoRef}
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
+            disablePictureInPicture
             className="absolute inset-0 h-full w-full object-cover"
         >
             <source src={video} type="video/webm" />
