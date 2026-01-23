@@ -1,30 +1,33 @@
 import logo from "../assets/logo.svg";
 import poster from "/public/hero.jpg";
-import useVideo from "../hook/useVideo";
+import video from "/public/video-desktop.mp4";
 
 export default function FirstLayer() {
-  const { sectionRef, videoRef, enabled } = useVideo();
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  
   return (
-    <section ref={sectionRef} className="relative h-screen overflow-hidden">
+    <section className="relative h-screen overflow-hidden">
       <div
-        className={`absolute inset-0 bg-cover bg-center h-screen ${
-          enabled ? "opacity-0" : "opacity-100"
-        }`}
-        style={{ backgroundImage: `url(${poster})` }}
+        className="absolute inset-0 bg-cover bg-center h-screen"
       />
-
+    { isMobile ?
+        <img
+            src={poster}    
+            alt="Background Poster"
+            className="absolute inset-0 h-full w-full object-cover h-screen bg-cover"
+        />
+      :
       <video
-        ref={videoRef}
         autoPlay
         muted
         playsInline
         preload="metadata"
         disablePictureInPicture
         loop
-        className={`absolute inset-0 h-full w-full object-cover h-screen bg-cover${
-          enabled ? "opacity-100" : "opacity-0"
-        }`}
+        className="absolute inset-0 h-full w-full object-cover h-screen bg-cover"
+        src={video}
       />
+    }
 
       <div className="absolute top-0 right-0 p-4 z-20">
             <img
