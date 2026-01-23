@@ -1,47 +1,32 @@
-import { useEffect, useRef } from 'react';
-import logo from '../assets/logo.svg';
-import video from '../assets/video.webm';
+import logo from "../assets/logo.svg";
+import poster from "/public/hero.jpg";
+import useVideo from "../hook/useVideo";
 
-export default function FirstLayer(){
-    const sectionRef = useRef<HTMLElement>(null);
-    const videoRef = useRef<HTMLVideoElement>(null);
-
-    useEffect(() => {
-        const el = sectionRef.current;
-        const v = videoRef.current;
-        if (!el || !v) return;
-
-        const io = new IntersectionObserver(
-        ([entry]) => {
-            if (entry.isIntersecting) {
-            v.play().catch(() => {});
-            } else {
-            v.pause();
-            v.currentTime = 0;
-            }
-        },
-        { threshold: 0.3 }
-        );
-
-        io.observe(el);
-        return () => io.disconnect();
-    }, []);
-    return (
+export default function FirstLayer() {
+  const { sectionRef, videoRef, enabled } = useVideo();
+  return (
     <section ref={sectionRef} className="relative h-screen overflow-hidden">
-        <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            disablePictureInPicture
-            className="absolute inset-0 h-full w-full object-cover"
-        >
-            <source src={video} type="video/webm" />
-        </video>
+      <div
+        className={`absolute inset-0 bg-cover bg-center h-screen ${
+          enabled ? "opacity-0" : "opacity-100"
+        }`}
+        style={{ backgroundImage: `url(${poster})` }}
+      />
 
-        <div className="absolute top-0 right-0 p-4 z-20">
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        loop
+        className={`absolute inset-0 h-full w-full object-cover h-screen bg-cover${
+          enabled ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
+      <div className="absolute top-0 right-0 p-4 z-20">
             <img
             src={logo}
             alt="Numa Travel Logo"
