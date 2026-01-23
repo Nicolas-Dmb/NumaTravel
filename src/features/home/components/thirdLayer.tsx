@@ -1,19 +1,10 @@
 import default_img from '../assets/default_img.jpg';
-import React, { useEffect} from 'react';
+import React from 'react';
+import useDevice from '../hook/useDevice';
 
 export default function ThirdLayer(){
-    const islaptop = window.innerWidth >= 1100;
-    const istouchpad = window.innerWidth < 1100 && window.innerWidth >= 600;
-    useEffect(() => {
-        const handleResize = () => {
-            window.location.reload();
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    
+    const { islaptop, istouchpad } = useDevice();
 
     const itineraryCard = 
     <Card

@@ -44,3 +44,53 @@
     font-style: normal;
     font-display: swap;
 }
+
+/* Base style commun aux images */
+.tile{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Desktop / laptop */
+.collage-grid{
+  display: grid;
+  grid-template-columns: 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr;  /* gauche - centre - droite */
+  grid-template-rows: 7vh 7vh 7vh 7vh 7vh 7vh 7vh 7vh 7vh 7vh;        /* 3 lignes */
+  grid-template-areas:
+    "a a a a . . . . . . ."
+    "a a a a b b b b c c c"
+    "a a a a b b b b c c c"
+    "a a a a b b b b c c c"
+    ". d d d b b b b c c c"
+    ". d d d . . . . c c c"
+    ". d d d e e e e c c c"
+    ". d d d e e e e c c c"
+    ". d d d e e e e . . ."
+    ". d d d e e e e . . .";
+  align-items: stretch;
+}
+
+/* Placement */
+.tile-a{ grid-area: a; }
+.tile-b{ grid-area: b; }
+.tile-c{ grid-area: c; }
+.tile-d{ grid-area: d; }
+.tile-e{ grid-area: e; }
+
+/* Mobile: stack naturel */
+@media (max-width: 1024px){
+  .collage-grid{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "b"
+      "a"
+      "c"
+      "d"
+      "e";
+  }
+  .tile{
+    aspect-ratio: 16/10; /* garde une belle forme sur mobile */
+  }
+}
