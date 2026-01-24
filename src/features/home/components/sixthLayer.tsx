@@ -94,16 +94,15 @@ export function TicketCard({ title, description }: PropsCard) {
         <span className="absolute -bottom-5 -left-5 h-10 w-10 rounded-full bg-numa-white" />
         <span className="absolute -bottom-5 -right-5 h-10 w-10 rounded-full bg-numa-white" />
 
-        <div className={"text-center space-y-3 h-full flex flex-col pt-8" + (title ? " justify-center" : " items-start justify-center")}>
+        <div className={"text-center space-y-3 h-full flex flex-col pt-8" + (title ? " justify-center" : " items-start  justify-center")}>
             {title && (
-                <div className="h-[56px] md:h-[64px] px-2 flex items-start justify-center pb-24">
+                <div className="h-[56px] md:h-[56px] px-2 flex items-start justify-center pb-24">
                     <p className="font-poppins font-bold text-[22px] lg:text-[28px] leading-tight">
                         {title}
                     </p>
                 </div>
             )}
-
-          <p className="font-cormorant text-[20px] md:text-[22px] lg:text-[26px] leading-snug px-2 whitespace-pre-line">
+          <p className={`font-cormorant text-[20px] md:text-[22px] lg:text-[26px] leading-snug px-2 whitespace-pre-line`+ (title ? " h-[6em]" : "")}>
             {description}
           </p>
         </div>
