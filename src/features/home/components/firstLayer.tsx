@@ -1,21 +1,20 @@
 import logo from "../assets/logo.svg";
 import video from "/public/video-desktop.mp4";
+import hero from "/public/hero.jpg";
 
 export default function FirstLayer() {
   
   return (
     <section className="relative h-screen overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center h-screen"
-      />
       <video
         autoPlay
         muted
         playsInline
-        preload="metadata"
-        disablePictureInPicture
         loop
-        className="absolute inset-0 h-full w-full object-cover h-screen bg-cover"
+        preload="metadata"
+        poster={hero}
+        disablePictureInPicture
+        className="absolute inset-0 h-full w-full object-cover"
         src={video}
       />
 
