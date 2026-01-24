@@ -38,7 +38,7 @@ export default function SixthLayer() {
   ];
 
   return (
-    <section className="bg-numa-white text-center lg:min-h-screen px-4 py-5">
+    <section className="bg-numa-white text-center lg:min-h-screen px-4 py-5 pb-16">
       <h1 className="mb-6 font-cormorant text-[40px] font-bold text-numa-red lg:text-[55px]">
         Les étapes du processus
       </h1>
