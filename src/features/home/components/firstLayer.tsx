@@ -1,22 +1,13 @@
 import logo from "../assets/logo.svg";
-import poster from "/public/hero.jpg";
 import video from "/public/video-desktop.mp4";
 
 export default function FirstLayer() {
-  const isMobile = window.matchMedia("(max-width: 768px)").matches;
   
   return (
     <section className="relative h-screen overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center h-screen"
       />
-    { isMobile ?
-        <img
-            src={poster}    
-            alt="Background Poster"
-            className="absolute inset-0 h-full w-full object-cover h-screen bg-cover"
-        />
-      :
       <video
         autoPlay
         muted
@@ -27,7 +18,6 @@ export default function FirstLayer() {
         className="absolute inset-0 h-full w-full object-cover h-screen bg-cover"
         src={video}
       />
-    }
 
       <div className="absolute top-0 right-0 p-4 z-20">
             <img
