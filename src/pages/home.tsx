@@ -4,6 +4,7 @@ import ThirdLayer from '../features/home/components/thirdLayer';
 import FourthLayer from '../features/home/components/fourthLayer';
 import PanoramicLayer from '../features/home/components/panoramicLayer';
 import FifthLayer from '../features/home/components/fifthLayer';
+import SixthLayer from '../features/home/components/sixthLayer';
 
 export default function Home() {
     return (
@@ -18,7 +19,7 @@ export default function Home() {
             <div className="h-5 bg-numa-black"/>
             <div className="h-5 bg-numa-red"/>
             <div className="h-5 bg-numa-black"/>
-            
+            <SixthLayer />
         </div>
     );
 }
