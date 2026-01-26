@@ -1,39 +1,45 @@
-import indonesia_kayak from "../assets/indonesia_kayak.png";
-import useDevice from "../hook/useDevice";
-import {TicketCard} from './sixthLayer.tsx';
+import travelPlan from "../assets/travelPlan.jpg";
+import { TicketCard } from "./sixthLayer.tsx";
 
 export default function FifthLayer() {
-  const { islaptop } = useDevice();
 
-  const text = `Un travel planner est un professionnel du voyage spécialisé dans la création d’expériences sur mesure. Son rôle est d’écouter vos envies, de vous conseiller et de concevoir un itinéraire personnalisé, qui correspond à votre style, votre budget et votre rythme.
-              \n            
-              Contrairement à une agence de voyage, un travel planner ne réserve pas et ne paye pas pour vous : son rôle est purement conseil et accompagnement, afin que vous restiez libre dans vos choix et votre organisation.`;
+  const text = `Un travel planner est un professionnel du voyage spécialisé dans la création d’expériences sur mesure. Son rôle est d’écouter vos envies, de vous conseiller et de concevoir un itinéraire personnalisé, qui correspond à votre style, votre budget et votre rythme.`;
+  const text2 =
+    "Contrairement à une agence de voyage, un travel planner ne réserve pas et ne paye pas pour vous : son rôle est purement conseil et accompagnement, afin que vous restiez libre dans vos choix et votre organisation.";
 
   return (
-    <section className="bg-numa-white text-center xl:min-h-screen px-4 py-10">
-      <h1 className="mb-6 lg:mb-10 font-cormorant text-[40px] font-bold text-numa-red lg:text-[55px]">
+    <section className="bg-numa-white text-center xl:min-h-screen pt-10 pb-10 xl:pb-0">
+      <h1 className="font-cormorant text-[40px] font-bold text-numa-red lg:text-[55px] px-4">
         Qu’est-ce qu’un travel planner ?
       </h1>
+      <div className="mb-6 h-1 w-[30vw] bg-numa-red mx-auto mt-4 mb-6 lg:mb-10"></div>
 
-      <div className="mx-auto max-w-6xl grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10 items-stretch">
-        <div className="relative w-full max-w-2xl mx-auto lg:aspect-square">
-          {islaptop ? <TicketCard title={null} description={text} /> :
-          <div className="relative z-10 flex h-full items-center justify-center px-6 sm:px-10 lg:px-16 py-10">
-            <p
-              className={`font-poppins text-[14px] leading-relaxed lg:text-[20px] whitespace-pre-line ${
-                islaptop ? "text-numa-white" : "text-numa-black"
-              }`}
-            >
-              {text}
-            </p>
-          </div>}
+      <div className="hidden xl:grid w-full grid-cols-[1fr_1fr_220px] grid-rows-2 gap-5 items-stretch">
+        <div className="row-start-1 col-start-1 flex justify-end">
+          <div className="w-full max-w-xl pl-8">
+            <TicketCard title={null} description={text} />
+          </div>
         </div>
 
-        <img
-          src={indonesia_kayak}
-          alt="Indonesia Kayak"
-          className="hidden lg:block h-full w-full object-cover rounded-2xl"
-        />
+        <div className="row-start-2 col-start-2 flex justify-start relative z-10 -translate-y-24">
+          <div className="w-full max-w-xl pr-8">
+            <TicketCard title={null} description={text2} />
+          </div>
+        </div>
+
+        <div className="row-span-2 col-start-3">
+          <img
+            src={travelPlan}
+            alt="Travel Plan"
+            className="h-full w-full object-cover pb-10"
+          />
+        </div>
+      </div>
+
+      <div className="xl:hidden px-4 max-w-4xl mx-auto">
+        <p className="font-poppins text-[14px] sm:text-[16px] leading-relaxed text-numa-black whitespace-pre-line">
+          {text + "\n\n" + text2}
+        </p>
       </div>
     </section>
   );

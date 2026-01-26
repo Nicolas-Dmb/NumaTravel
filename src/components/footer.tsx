@@ -1,4 +1,4 @@
-import { FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaWhatsapp, FaFacebook} from "react-icons/fa";
 import {useNavigate} from "react-router-dom"
 
 
@@ -14,6 +14,7 @@ export default function Footer() {
                 <div className="flex flex-row gap-4">
                     <FaInstagram className="text-numa-white text-2xl" onClick={() => window.open("https://www.instagram.com/numatravelplan/", "_blank")} />
                     <FaWhatsapp className="text-numa-white text-2xl" onClick={() => window.open("https://wa.me/0659589733", "_blank")} />
+                    <FaFacebook className="text-numa-white text-2xl" onClick={() => window.open("https://www.facebook.com/profile.php?id=61585037937716", "_blank")} />
                 </div>
         </footer>
     );

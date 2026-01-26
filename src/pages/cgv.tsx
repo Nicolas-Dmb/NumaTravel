@@ -1,9 +1,10 @@
-
+import ReactMarkdown from "react-markdown";
+import cgv from "../features/cgv/cgv.md?raw";
 
 export default function CGV(){
     return(
-        <div className="p-8">
-            <h1 className="text-2xl font-bold mb-4">Conditions Générales de Vente (CGV)</h1>
-        </div>
+        <article className="legal font-poppins text-numa-black leading-relaxed bg-numa-white p-8 md:p-16 min-h-screen">
+            <ReactMarkdown>{cgv}</ReactMarkdown>
+        </article>
     )
 }

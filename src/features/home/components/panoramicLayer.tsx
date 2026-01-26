@@ -40,7 +40,7 @@ function MobileGrid(){
         { src: indonesia_beach, alt: 'Indonesia Beach' },
     ];
     return (
-        <div className="lg:hidden px-4">
+        <div className=" px-4">
           <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [-webkit-overflow-scrolling:touch]">
             {photos.map((p, i) => (
               <img

@@ -39,9 +39,10 @@ export default function SixthLayer() {
 
   return (
     <section className="bg-numa-white text-center lg:min-h-screen px-4 py-5 pb-16">
-      <h1 className="mb-6 font-cormorant text-[40px] font-bold text-numa-red lg:text-[55px]">
-        Les étapes du processus
+      <h1 className="font-cormorant text-[40px] font-bold text-numa-red lg:text-[55px]">
+        Votre voyage, étape par étape
       </h1>
+      <div className="h-1 w-[30vw] bg-numa-red mx-auto mt-4 mb-6 lg:mb-10"></div>
 
       {!islaptop && !istouchpad && (
         <div className="flex gap-10 overflow-x-auto snap-x snap-mandatory pb-4 [-webkit-overflow-scrolling:touch] pl-3">
@@ -82,27 +83,30 @@ export function TicketCard({ title, description }: PropsCard) {
   return (
     <div className="pb-6 lg:pb-0">
       <div
-        className="
+        className={`
           relative mx-auto
-          bg-numa-black text-numa-white p-4
-          w-[80vw] max-w-[360px] aspect-square
+          bg-numa-black text-numa-white
+          aspect-square
           md:w-full md:max-w-none
-        "
+        `+ (title ? " w-[80vw] max-w-[360px] p-4 " : " w-[20vw] h-[40vh] p-8 ")}
       >
         <span className="absolute -top-5 -left-5 h-10 w-10 rounded-full bg-numa-white" />
         <span className="absolute -top-5 -right-5 h-10 w-10 rounded-full bg-numa-white" />
         <span className="absolute -bottom-5 -left-5 h-10 w-10 rounded-full bg-numa-white" />
         <span className="absolute -bottom-5 -right-5 h-10 w-10 rounded-full bg-numa-white" />
 
-        <div className={"text-center space-y-3 h-full flex flex-col pt-8" + (title ? " justify-center" : " items-start  justify-center")}>
+        <div className={"text-center h-full flex flex-col" + (title ? " justify-evenly " : " items-start  justify-center ")}>
             {title && (
-                <div className="h-[56px] md:h-[56px] px-2 flex items-start justify-center pb-24">
-                    <p className="font-poppins font-bold text-[22px] lg:text-[28px] leading-tight">
-                        {title}
-                    </p>
+                <div>
+                  <div className="h-[56px] px-2 flex items-center justify-center pb-16 md:pb-24 h-[2.6em] pt-4">
+                      <p className="font-poppins font-bold text-[22px] lg:text-[28px] xl:text-[22px] leading-tight">
+                          {title}
+                      </p>
+                  </div>
+                  <div className="h-1 w-[20vw] md:w-[5vw] bg-numa-white mx-auto "></div>
                 </div>
             )}
-          <p className={`font-cormorant text-[20px] md:text-[22px] lg:text-[26px] leading-snug px-2 whitespace-pre-line`+ (title ? " h-[6em]" : "")}>
+          <p className={`font-cormorant text-[20px] md:text-[22px] lg:text-[26px] xl:text-[22px] leading-snug px-2 whitespace-pre-line md:text-justify`+ (title ? " h-[6em]" : "")}>
             {description}
           </p>
         </div>

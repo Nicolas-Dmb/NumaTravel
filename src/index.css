@@ -45,14 +45,12 @@
     font-display: swap;
 }
 
-/* Base style commun aux images */
 .tile{
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Desktop / laptop */
 .collage-grid{
   display: grid;
   grid-template-columns: 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr 1.15fr;  /* gauche - centre - droite */
@@ -71,14 +69,12 @@
   align-items: stretch;
 }
 
-/* Placement */
 .tile-a{ grid-area: a; }
 .tile-b{ grid-area: b; }
 .tile-c{ grid-area: c; }
 .tile-d{ grid-area: d; }
 .tile-e{ grid-area: e; }
 
-/* Mobile: stack naturel */
 @media (max-width: 1024px){
   .collage-grid{
     grid-template-columns: 1fr;
@@ -91,6 +87,18 @@
       "e";
   }
   .tile{
-    aspect-ratio: 16/10; /* garde une belle forme sur mobile */
+    aspect-ratio: 16/10; 
   }
+}
+
+
+.legal h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.legal h2 {
+  margin-top: 2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
