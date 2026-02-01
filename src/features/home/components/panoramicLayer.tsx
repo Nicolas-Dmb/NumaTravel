@@ -1,4 +1,4 @@
-import useDevice from '../hook/useDevice';
+import useDevice from '../../../hook/useDevice';
 import cinqo_terra from '../assets/5terra.png';
 import greece from '../assets/greece.png';
 import indonesia_beach from '../assets/indonesia_beach.png';

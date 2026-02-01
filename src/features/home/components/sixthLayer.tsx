@@ -1,5 +1,5 @@
 
-import useDevice from "../hook/useDevice";
+import useDevice from "../../../hook/useDevice";
 
 export default function SixthLayer() {
   const { islaptop, istouchpad } = useDevice();
@@ -38,7 +38,7 @@ export default function SixthLayer() {
   ];
 
   return (
-    <section className="bg-numa-white text-center lg:min-h-screen px-4 py-5 pb-16">
+    <section id="accompagnement" className="bg-numa-white text-center lg:min-h-screen px-4 py-5 pb-16">
       <h1 className="font-cormorant text-[40px] font-bold text-numa-red lg:text-[55px]">
         Votre voyage, étape par étape
       </h1>

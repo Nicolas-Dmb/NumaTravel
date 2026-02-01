@@ -3,11 +3,13 @@ import Home from './pages/home';
 import Footer from './components/footer';
 import LegalNotice from './pages/legalNotice';
 import CGV from './pages/cgv';
+import Header from './components/header';
 
 export default function App() {
   return (
-    <div id="global-wrapper" className='h-screen w-screen' >
+    <div id="global-wrapper" className='h-screen w-screen select-none' >
       <Router>
+        <Header />
         <div className="relative flex-1">
           <Routes>
             <Route path="/" element={<Home/>} />

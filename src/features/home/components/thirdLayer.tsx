@@ -5,7 +5,7 @@ import activites from '../assets/activity.jpg';
 import carnet from '../assets/carnet.jpg';
 import assistance from '../assets/assistance.jpg';
 import React from 'react';
-import useDevice from '../hook/useDevice';
+import useDevice from '../../../hook/useDevice';
 
 export default function ThirdLayer(){
     
