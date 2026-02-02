@@ -6,6 +6,7 @@ import carnet from '../assets/carnet.jpg';
 import assistance from '../assets/assistance.jpg';
 import React from 'react';
 import useDevice from '../../../hook/useDevice';
+import { useEffect, useRef } from "react";
 
 export default function ThirdLayer(){
     
@@ -53,7 +54,7 @@ export default function ThirdLayer(){
             <h1 className="pt-10 pb-0 font-cormorant font-bold text-[50px] lg:text-[55px] text-numa-white text-center">Mes services</h1>
             <div className="mx-auto h-1 w-[10vw] mt-4 bg-numa-white mb-10"></div>
             <div className="mx-auto flex w-full flex-col items-center justify-evenly gap-10 py-10">
-                {   islaptop ? laptopCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard}) : istouchpad ? touchpadCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard}) : mobileCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard})}
+                {   islaptop ? laptopCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard}) : istouchpad ? touchpadCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard}) : MobileCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard})}
             </div>
         </section>
     )
@@ -81,32 +82,72 @@ function laptopCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guid
     );
 }
 
-function mobileCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard}:LayoutProps) {
-    return (
-        <div className="w-full overflow-x-auto px-4">
-            <div className="flex gap-6 snap-x snap-mandatory">
-                <div className="snap-start min-w-[90%] sm:min-w-[80%] md:min-w-[33%]">
-                {itineraryCard}
+function MobileCardLayout({ itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard }: LayoutProps) {
+  const cards = [itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard];
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollLeft = el.scrollWidth / 4;
+  }, []);
+
+  const handleScroll = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const max = el.scrollWidth - el.clientWidth;
+
+    const THRESHOLD = 80;
+
+    if (el.scrollLeft > max - THRESHOLD) {
+      el.scrollLeft = el.scrollWidth / 4;
+    }
+
+    if (el.scrollLeft < THRESHOLD) {
+      el.scrollLeft = el.scrollWidth / 4;
+    }
+  };
+
+  return (
+    <div className="w-full px-4">
+      <div className="group overflow-hidden">
+        <div
+          ref={scrollerRef}
+          onScroll={handleScroll}
+          className="hide-scrollbar overflow-x-auto"
+        >
+          <div
+            className="
+              flex flex-nowrap w-max py-2
+              animate-marquee
+              group-hover:[animation-play-state:paused]
+              group-focus-within:[animation-play-state:paused]
+            "
+          >
+            <div className="flex flex-nowrap gap-6 flex-none pr-6">
+              {cards.map((card, i) => (
+                <div key={`a-${i}`} className="w-[260px] sm:w-[300px] md:w-[340px] flex-none">
+                  {card}
                 </div>
-                <div className="snap-start min-w-[90%] sm:min-w-[80%] md:min-w-[33%]">
-                {flyCard}
-                </div>
-                <div className="snap-start min-w-[90%] sm:min-w-[80%] md:min-w-[33%]">
-                {hotelCard}
-                </div>
-                <div className="snap-start min-w-[90%] sm:min-w-[80%] md:min-w-[33%]">
-                {activityCard}
-                </div>
-                <div className="snap-start min-w-[90%] sm:min-w-[80%] md:min-w-[33%]">
-                {guideCard}
-                </div>
-                <div className="snap-start min-w-[90%] sm:min-w-[80%] md:min-w-[33%]">
-                {supportCard}
-                </div>
+              ))}
             </div>
+
+            <div className="flex flex-nowrap gap-6 flex-none">
+              {cards.map((card, i) => (
+                <div key={`b-${i}`} className="w-[260px] sm:w-[300px] md:w-[340px] flex-none">
+                  {card}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
+
+
 
 function touchpadCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard}:LayoutProps) {
     return (
@@ -128,11 +169,19 @@ interface CardProps {
 }
 
 function Card({ title, description, img }: CardProps) {
-    return (
-        <div className="flex flex-col items-center text-numa-white text-center px-10">
-            <img src={img} alt={title} className="w-[70vw] h-[30vh] lg:w-[20vw] lg:h-[20vh] object-cover rounded-md mb-4" />
-            <h2 className="text-[26px] font-bold font-cormorant pb-8 md:pb-4 ">{title}</h2>
-            <p className="text-[20px] font-bold font-cormorant">{description}</p>
-        </div>
-    );
+  return (
+    <div className="flex flex-col items-center text-numa-white text-center">
+      <img
+        src={img}
+        alt={title}
+        className="w-full h-[180px] sm:h-[200px] object-cover rounded-md mb-4"
+      />
+      <h2 className="text-[22px] sm:text-[24px] font-bold font-cormorant pb-3">
+        {title}
+      </h2>
+      <p className="text-[16px] sm:text-[18px] font-cormorant">
+        {description}
+      </p>
+    </div>
+  );
 }

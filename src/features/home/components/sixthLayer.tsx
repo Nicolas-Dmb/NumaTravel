@@ -45,12 +45,35 @@ export default function SixthLayer() {
       <div className="h-1 w-[30vw] bg-numa-red mx-auto mt-4 mb-6 lg:mb-10"></div>
 
       {!islaptop && !istouchpad && (
-        <div className="flex gap-10 overflow-x-auto snap-x snap-mandatory pb-4 [-webkit-overflow-scrolling:touch] pl-3">
-          {steps.map((s) => (
-            <div key={s.title} className="snap-center shrink-0">
-              <TicketCard title={s.title} description={s.description} />
+        <div className="w-full">
+          <div className="group overflow-hidden">
+            <div className="hide-scrollbar overflow-x-auto">
+              <div
+                className="
+                  flex flex-nowrap w-max py-2
+                  animate-marquee
+                  group-hover:[animation-play-state:paused]
+                  group-focus-within:[animation-play-state:paused]
+                "
+              >
+                <div className="flex flex-nowrap gap-10 flex-none pr-10">
+                  {steps.map((s) => (
+                    <div key={`a-${s.title}`} className="flex-none">
+                      <TicketCard title={s.title} description={s.description} />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex flex-nowrap gap-10 flex-none">
+                  {steps.map((s) => (
+                    <div key={`b-${s.title}`} className="flex-none">
+                      <TicketCard title={s.title} description={s.description} />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       )}
 
