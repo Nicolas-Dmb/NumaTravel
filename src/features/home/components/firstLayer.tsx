@@ -1,8 +1,11 @@
 import logo from "../assets/logo.svg";
 import video from "/public/video-desktop.mp4";
 import hero from "/public/hero.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function FirstLayer() {
+    const navigate = useNavigate();
+
   
   return (
     <section className="relative h-screen overflow-hidden">
@@ -33,7 +36,7 @@ export default function FirstLayer() {
             </h1>
             <p className="text-[24px] font-cormorant">TRAVEL PLANNER</p>
 
-            <button className="border border-white mt-6 px-14 py-2 font-delicious text-white rounded hover:bg-white/10 transition">
+            <button onClick={()=> navigate("/explorer")} className="border border-white mt-6 px-14 py-2 font-delicious text-white rounded hover:bg-white/10 transition">
             EXPLORE
             </button>
         </div>

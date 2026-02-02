@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/home';
 import Footer from './components/footer';
+
+import Home from './pages/home';
 import LegalNotice from './pages/legalNotice';
 import CGV from './pages/cgv';
 import Header from './components/header';
 import Contact from './pages/contact';
+import Explorer from './pages/explorer';
+
 import ScrollToAnchor from './utils/scrollToHash';
 
 export default function App() {
@@ -19,6 +22,7 @@ export default function App() {
             <Route path="/mentions-legales" element={<LegalNotice />} />
             <Route path="/cgv" element={<CGV />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/explorer" element={<Explorer />} />
           </Routes>
         </div>
         <Footer />
