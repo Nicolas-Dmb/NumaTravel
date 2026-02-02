@@ -1,9 +1,10 @@
-
+import ReactMarkdown from "react-markdown";
+import legal from "../features/markdown/legal.md?raw";
 
 export default function LegalNotice(){
     return(
-        <div className="p-8">
-            <h1 className="text-2xl font-bold mb-4">Mentions Légales</h1>
-        </div>
+        <article className="legal font-poppins text-numa-black leading-relaxed bg-numa-white p-16 md:p-24 min-h-screen">
+            <ReactMarkdown>{legal}</ReactMarkdown>
+        </article>
     )
 }

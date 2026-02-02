@@ -4,6 +4,8 @@ import useHeader from "../hook/useHeader.tsx";
 import more from "/public/more.svg";
 import close from "/public/close.svg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
 
 const buttonStyle =
   "text-[18px] transform transition-transform duration-300 hover:-translate-y-0.5 hover:scale-110 cursor-pointer text-numa-black font-cormorant font-bold";
@@ -58,17 +60,17 @@ function LaptopHeader({ onOpenServices, onForceClose }: LaptopHeaderProps) {
     <div
       className="text-numa-black flex items-center justify-around h-16 font-cormorant font-bold"
     >
-      <a onMouseEnter={onForceClose} className={buttonStyle} href="/#first-layer">ACCUEIL</a>
-      <a onMouseEnter={onForceClose} className={buttonStyle} href="/#fourth-layer">QUI SUIS-JE ?</a>
+      <Link onMouseEnter={onForceClose} className={buttonStyle} to="/#first-layer">ACCUEIL</Link>
+      <Link onMouseEnter={onForceClose} className={buttonStyle} to="/#fourth-layer">QUI SUIS-JE ?</Link>
 
       <div onMouseEnter={onOpenServices}>
         <a className={buttonStyle}>MES SERVICES</a>
       </div>
 
-      <a onMouseEnter={onForceClose} className={buttonStyle}>EXPLORER</a>
-      <a onMouseEnter={onForceClose} className="text-numa-red text-[20px] transform transition-transform duration-300 hover:-translate-y-0.5 hover:scale-110">
+      <Link onMouseEnter={onForceClose} className={buttonStyle} to="/explorer">EXPLORER</Link>
+      <Link onMouseEnter={onForceClose} to="/contact" className="text-numa-red text-[20px] transform transition-transform duration-300 hover:-translate-y-0.5 hover:scale-110">
         CONTACT
-      </a>
+      </Link>
     </div>
   );
 }
@@ -82,12 +84,12 @@ function TouchpadHeader({ setSeeMore }: MdHeaderProps) {
   return <div
       className="text-numa-black flex items-center justify-between h-16 gap-8 items-center px-4"
     >
-      <a className="text-[22px] font-cormorant font-semibold" href="/#first-layer">NUMA TRAVEL</a>
+      <Link className="text-[22px] font-cormorant font-semibold" to="/#first-layer">NUMA TRAVEL</Link>
       <div className="flex gap-10 items-center">
-        <a className="text-[22px] font-cormorant font-semibold">EXPLORER</a>
-        <a className="text-[22px] text-numa-red font-cormorant font-semibold">
+        <Link to="/explorer" className="text-[22px] font-cormorant font-semibold">EXPLORER</Link>
+        <Link to="/contact" className="text-[22px] text-numa-red font-cormorant font-semibold">
             CONTACT
-        </a>
+        </Link>
         <img src={more} alt="More options" className="w-6 h-6 cursor-pointer" onClick={() => setSeeMore(true)} />
       </div>
     </div>
@@ -98,12 +100,12 @@ function MobileHeader({ setSeeMore }: MdHeaderProps) {
     <div
       className="text-numa-black flex items-center justify-between h-16 gap-8 items-center"
     >
-      <a className="text-[14px] font-cormorant font-semibold" href="/#first-layer">NUMA TRAVEL</a>
+      <Link className="text-[14px] font-cormorant font-semibold" to="/#first-layer">NUMA TRAVEL</Link>
       <div className="flex gap-4 items-center">
-        <a className="text-[14px] font-cormorant font-semibold">EXPLORER</a>
-        <a className="text-[14px] font-cormorant font-semibold text-numa-red">
+        <Link to="/explorer" className="text-[14px] font-cormorant font-semibold">EXPLORER</Link>
+        <Link to="/contact" className="text-[14px] font-cormorant font-semibold text-numa-red">
             CONTACT
-        </a>
+        </Link>
         <img src={more} alt="More options" className="w-5 h-5 cursor-pointer" onClick={() => setSeeMore(true)} />
       </div>
     </div>
@@ -125,10 +127,10 @@ function MoreSections({ isTouchpad, setSeeMore, seeMore, scrollDirection }: More
     <div className={`fixed top-0 left-0 w-full bg-[#ebe6e277] z-50 backdrop-blur-sm shadow-lg pb-8 px-8 ${seeMore ? "block" : "hidden"} transition-transform duration-300 ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}`}>
       <img src={close} alt="Close options" className={`cursor-pointer float-right mt-4 ${isTouchpad ? "w-5 h-5" : "w-5 h-5"}`} onClick={() => setSeeMore(false)} />
       <div className="flex flex-col gap-4 pt-16 items-center">
-        <a className={isTouchpad ? touchPadStyle : mobileStyle} href="/#services-voyages">QUI SUIS-JE ?</a>
-        <a className={isTouchpad ? touchPadStyle : mobileStyle} href="/#travel-planner">MES SERVICES VOYAGES</a>
-        <a className={isTouchpad ? touchPadStyle : mobileStyle} href="/#travel-planner">TRAVEL PLANNER</a>
-        <a className={isTouchpad ? touchPadStyle : mobileStyle} href="/#accompagnement">ACCOMPAGNEMENT</a>
+        <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#services-voyages">QUI SUIS-JE ?</Link>
+        <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">MES SERVICES VOYAGES</Link>
+        <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">TRAVEL PLANNER</Link>
+        <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#accompagnement">ACCOMPAGNEMENT</Link>
       </div>
     </div>
   )
@@ -161,9 +163,9 @@ function LaptopServices({ displayServices, close, scrollDirection }: LaptopServi
           ${displayServices ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"}
         `}
       >
-        <a className={subButtonStyle + " block px-5 py-3"} href="/#services-voyages">MES SERVICES VOYAGES</a>
-        <a className={subButtonStyle + " block px-5 py-3"} href="/#travel-planner">TRAVEL PLANNER</a>
-        <a className={subButtonStyle + " block px-5 py-3"} href="/#accompagnement">ACCOMPAGNEMENT</a>
+        <Link className={subButtonStyle + " block px-5 py-3"} to="/#services-voyages">MES SERVICES VOYAGES</Link>
+        <Link className={subButtonStyle + " block px-5 py-3"} to="/#travel-planner">TRAVEL PLANNER</Link>
+        <Link className={subButtonStyle + " block px-5 py-3"} to="/#accompagnement">ACCOMPAGNEMENT</Link>
       </div>
     </div>
   )

@@ -4,6 +4,8 @@ import Footer from './components/footer';
 import LegalNotice from './pages/legalNotice';
 import CGV from './pages/cgv';
 import Header from './components/header';
+import Contact from './pages/contact';
+import ScrollToAnchor from './utils/scrollToHash';
 
 export default function App() {
   return (
@@ -11,10 +13,12 @@ export default function App() {
       <Router>
         <Header />
         <div className="relative flex-1">
+          <ScrollToAnchor />
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/mentions-legales" element={<LegalNotice />} />
             <Route path="/cgv" element={<CGV />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </div>
         <Footer />

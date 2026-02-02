@@ -6,7 +6,7 @@ export default function Footer() {
     const navigate = useNavigate();
 
     return (
-        <footer className="bg-numa-black text-white py-6 flex flex-row justify-between items-start px-8">
+        <footer className="bg-numa-black text-white py-6 flex flex-row justify-between items-start px-8 h-16">
                 <div className="flex flex-row gap-4">
                     <button className="text-sm text-numa-white" onClick={() => navigate("/mentions-legales")}>Mentions légales</button>
                     <button className="text-sm text-numa-white" onClick={() => navigate("/cgv")}>CGV</button>
