@@ -284,11 +284,11 @@ function AlbumModal({
 }) {
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/40 p-4 flex items-end md:items-center justify-center"
+      className="fixed inset-0 z-50 bg-numa-black/40 p-4 flex items-end md:items-center justify-center"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-4xl rounded-3xl bg-white p-6 shadow-xl"
+        className="w-full max-w-4xl rounded-3xl bg-numa-white p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
