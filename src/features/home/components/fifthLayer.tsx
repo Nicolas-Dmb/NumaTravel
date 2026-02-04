@@ -1,4 +1,4 @@
-import travelPlan from "../assets/travelPlan.jpg";
+import travelPlan from "../assets/travelPlan.webp";
 import { TicketCard } from "./sixthLayer.tsx";
 
 export default function FifthLayer() {
@@ -30,8 +30,10 @@ export default function FifthLayer() {
         <div className="row-span-2 col-start-3">
           <img
             src={travelPlan}
-            alt="Travel Plan"
+            alt="Bord de mer avec des transats, un parasol et des cocotiers"
             className="h-full w-full object-cover pb-10"
+            loading="lazy"
+            draggable={false}
           />
         </div>
       </div>

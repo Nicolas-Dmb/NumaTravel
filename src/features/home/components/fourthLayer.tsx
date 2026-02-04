@@ -1,4 +1,4 @@
-import beautiful_lolo from '../assets/beautiful_lolo.png'
+import alois from '../assets/alois.webp'
 
 export default function FourthLayer() {
   return (
@@ -8,9 +8,11 @@ export default function FourthLayer() {
 
           <div className="xl:flex xl:flex-col xl:justify-start">
             <img
-              src={beautiful_lolo}
+              src={alois}
               alt="Photo de moi en voyage"
               className="mx-auto h-auto w-[80vw] max-w-md object-cover xl:h-[90vh] xl:w-auto xl:max-w-none"
+              loading="lazy"
+              draggable={false}
             />
           </div>
 

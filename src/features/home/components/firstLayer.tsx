@@ -1,6 +1,6 @@
 import logo from "../assets/logo.svg";
 import video from "/video-desktop.mp4";
-import hero from "/hero.jpg";
+import hero from "/hero.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function FirstLayer() {
@@ -33,7 +33,7 @@ export default function FirstLayer() {
       <div className="absolute top-0 right-0 p-4 z-20">
             <img
             src={logo}
-            alt="Numa Travel Logo"
+            alt="logo de Numa Travel"
             className="w-20 h-20 lg:w-32 lg:h-32 xl:w-48 xl:h-48"
             />
         </div>

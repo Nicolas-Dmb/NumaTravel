@@ -1,4 +1,4 @@
-import beachLayer2 from '../assets/beachLayer2.png';
+import beachLayer2 from '../assets/beachLayer2.webp';
 
 export default function SecondLayer(){
     return (
@@ -18,8 +18,10 @@ export default function SecondLayer(){
             <div className="w-full lg:w-auto">
                 <img
                     src={beachLayer2}
-                    alt="Beach Layer 2"
+                    alt="photo d'une plage en Indonésie"
                     className="h-auto w-[40vw] lg:w-[35vw] mx-auto"
+                    loading="lazy"
+                    draggable={false}
                 />
             </div>
         </div>
