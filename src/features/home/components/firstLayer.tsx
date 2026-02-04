@@ -1,6 +1,6 @@
 import logo from "../assets/logo.svg";
-import video from "/public/video-desktop.mp4";
-import hero from "/public/hero.jpg";
+import video from "/video-desktop.mp4";
+import hero from "/hero.jpg";
 import { useNavigate } from "react-router-dom";
 
 export default function FirstLayer() {

@@ -1,8 +1,8 @@
 import useDevice from "../hook/useDevice.tsx";
 import useScrollDirection from "../hook/useScroll.tsx";
 import useHeader from "../hook/useHeader.tsx";
-import more from "/public/more.svg";
-import close from "/public/close.svg";
+import more from "/more.svg";
+import close from "/close.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
