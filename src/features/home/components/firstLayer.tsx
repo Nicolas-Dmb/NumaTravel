@@ -18,8 +18,17 @@ export default function FirstLayer() {
         poster={hero}
         disablePictureInPicture
         className="absolute inset-0 h-full w-full object-cover"
-        src={video}
-      />
+      >
+        <source src={video} type="video/mp4" />
+
+        <track
+          kind="captions"
+          src="/captions/hero-fr.vtt"
+          srcLang="fr"
+          label="Français"
+          default
+        />
+      </video>
 
       <div className="absolute top-0 right-0 p-4 z-20">
             <img
