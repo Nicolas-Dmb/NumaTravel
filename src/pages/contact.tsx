@@ -1,5 +1,5 @@
 import { FaInstagram, FaWhatsapp, FaFacebook, FaEnvelope } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 export default function Contact(){
@@ -14,56 +14,6 @@ export default function Contact(){
     );
 }
 
-function Calendly() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const existing = document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]');
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = "https://assets.calendly.com/assets/external/widget.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    const minTime = setTimeout(() => setLoading(false), 1600);
-
-    const maxTime = setTimeout(() => setLoading(false), 6000);
-
-    return () => {
-      clearTimeout(minTime);
-      clearTimeout(maxTime);
-    };
-  }, []);
-
-  return (
-    <div className="w-full md:w-[55%]">
-      <h2 className="font-poppins font-semibold text-[18px] text-numa-black mb-2">
-        Prendre rendez-vous
-      </h2>
-      <p className="text-gray-600 text-sm mb-4">
-        Choisis un créneau et discutons ensemble de ton projet de voyage.
-      </p>
-
-      <div className="relative rounded-2xl overflow-hidden border border-gray-200">
-        <div
-          className={`absolute inset-0 z-10 bg-white transition-opacity duration-500 ${
-            loading ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        >
-          <CalendlySkeleton />
-        </div>
-
-        <div
-          className="calendly-inline-widget"
-          data-url="https://calendly.com/numatravelplan/rdv-telephonique-1?hide_event_type_details=1&hide_gdpr_banner=1"
-          style={{ minWidth: "320px", height: "500px" }}
-        />
-      </div>
-    </div>
-  );
-}
-
 function ContactOptions() {
   return (
     <div className="flex flex-col gap-2 md:gap-6 w-full md:w-[40%]">
@@ -75,10 +25,9 @@ function ContactOptions() {
           Je réponds généralement sous 24–48h.
         </p>
       </div>
-
       <button
         type="button"
-        onClick={() => window.open("https://wa.me/33659589733", "_blank")}
+        onClick={() => window.open("https://wa.me/0659589733", "_blank")}
         className="flex items-center gap-3 rounded-xl border border-gray-200 p-4 hover:shadow-sm transition"
       >
         <FaWhatsapp className="text-numa-red text-2xl" />
@@ -95,7 +44,7 @@ function ContactOptions() {
         <FaEnvelope className="text-numa-red text-2xl" />
         <div>
           <p className="font-poppins font-medium text-numa-black">Email</p>
-          <p className="text-sm text-gray-600">contact@numatravel.com</p>
+          <p className="text-sm text-gray-600">numatravelplan@gmail.com</p>
         </div>
       </a>
 
@@ -104,7 +53,7 @@ function ContactOptions() {
         <div className="flex items-center gap-4 mt-3">
           <button
             type="button"
-            onClick={() => window.open("https://instagram.com/TON_COMPTE", "_blank")}
+            onClick={() =>  window.open("https://www.instagram.com/numatravelplan/", "_blank")}
             className="p-3 rounded-full border border-gray-200 hover:shadow-sm transition"
             aria-label="Instagram"
           >
@@ -113,13 +62,109 @@ function ContactOptions() {
 
           <button
             type="button"
-            onClick={() => window.open("https://facebook.com/TON_COMPTE", "_blank")}
+            onClick={() => window.open("https://www.facebook.com/profile.php?id=61585037937716", "_blank")}
             className="p-3 rounded-full border border-gray-200 hover:shadow-sm transition"
             aria-label="Facebook"
           >
             <FaFacebook className="text-numa-black text-xl" />
           </button>
         </div>
+      </div>
+    </div>
+  );
+}
+function Calendly() {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const CALENDLY_URL =
+    "https://calendly.com/numatravelplan/rdv-telephonique-1?hide_event_type_details=1&hide_gdpr_banner=1";
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const isVisible = entries.some((e) => e.isIntersecting);
+        if (isVisible) {
+          setShouldLoad(true);
+          io.disconnect();
+        }
+      },
+      { root: null, threshold: 0.15 }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoad) return;
+
+    const SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
+    const existing = document.querySelector(`script[src="${SCRIPT_SRC}"]`) as HTMLScriptElement | null;
+
+    const onMessage = (e: MessageEvent) => {
+      if (typeof e.data === "object" && e.data?.event?.startsWith?.("calendly.")) {
+        setLoading(false);
+      }
+    };
+
+    window.addEventListener("message", onMessage);
+
+    const markLoadedFallback = window.setTimeout(() => setLoading(false), 9000);
+
+    if (!existing) {
+      const script = document.createElement("script");
+      script.src = SCRIPT_SRC;
+      script.async = true;
+      script.onload = () => {
+      };
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      window.removeEventListener("message", onMessage);
+      window.clearTimeout(markLoadedFallback);
+    };
+  }, [shouldLoad]);
+
+  return (
+    <div className="w-full md:w-[55%]" ref={containerRef}>
+      <h2 className="font-poppins font-semibold text-[18px] text-numa-black mb-2">
+        Prendre rendez-vous
+      </h2>
+      <p className="text-gray-600 text-sm mb-4">
+        Choisis un créneau et discutons ensemble de ton projet de voyage.
+      </p>
+
+      <div className="relative rounded-2xl overflow-hidden border border-gray-200">
+        <div
+          className={`absolute inset-0 z-10 bg-white transition-opacity duration-500 ${
+            !shouldLoad || loading ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        >
+          <CalendlySkeleton />
+          <div className="px-6 pb-6">
+            <button
+              type="button"
+              onClick={() => window.open(CALENDLY_URL, "_blank")}
+              className="mt-4 w-full rounded-xl border border-gray-200 px-4 py-3 font-poppins font-medium hover:shadow-sm transition"
+            >
+              Ouvrir Calendly (si ça traîne)
+            </button>
+          </div>
+        </div>
+
+        {shouldLoad && (
+          <div
+            className="calendly-inline-widget"
+            data-url={CALENDLY_URL}
+            style={{ minWidth: "320px", height: "500px" }}
+          />
+        )}
       </div>
     </div>
   );

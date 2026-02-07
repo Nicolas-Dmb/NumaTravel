@@ -57,6 +57,7 @@ function WorldMap({
           touch-none
           select-none
           shadow-lg
+          cursor-grab active:cursor-grabbing
         "
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -92,13 +93,13 @@ function WorldMap({
                   movedRef.current = false; 
                 }}
               >
-                <circle cx={d.x} cy={d.y} r="12" fill="numa-black" opacity="0.12" />
-                <circle cx={d.x} cy={d.y} r="5" fill="numa-black" />
+                <circle cx={d.x} cy={d.y} r="5" fill="numa-black" opacity="0.12" />
+                <circle cx={d.x} cy={d.y} r="2" fill="numa-black" />
                 <text
                   x={d.x}
-                  y={d.y - 14}
+                  y={d.y - 5}
                   textAnchor="middle"
-                  fontSize="12"
+                  fontSize="8"
                   fill="numa-black"
                   opacity="0.85"
                 >

@@ -126,7 +126,7 @@ function MoreSections({ isTouchpad, setSeeMore, seeMore, scrollDirection }: More
   return (
     <div className={`fixed top-0 left-0 w-full bg-[#ebe6e277] z-50 backdrop-blur-sm shadow-lg pb-8 px-8 ${seeMore ? "block" : "hidden"} transition-transform duration-300 ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}`}>
       <img src={close} alt="Close options" className={`cursor-pointer float-right mt-4 ${isTouchpad ? "w-5 h-5" : "w-5 h-5"}`} onClick={() => setSeeMore(false)} />
-      <div className="flex flex-col gap-4 pt-16 items-center">
+      <div className="flex flex-col gap-4 pt-16 items-center" onClick={()=> setSeeMore(false)}>
         <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#services-voyages">QUI SUIS-JE ?</Link>
         <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">MES SERVICES VOYAGES</Link>
         <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">TRAVEL PLANNER</Link>

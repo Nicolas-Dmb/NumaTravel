@@ -5,7 +5,7 @@ export default function useDevice() {
     const w = window.innerWidth;
     return {
       islaptop: w >= 1100,
-      istouchpad: w < 1100 && w >= 600,
+      istouchpad: w < 1100 && w >= 700,
     };
   };
 
