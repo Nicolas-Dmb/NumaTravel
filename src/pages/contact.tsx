@@ -1,5 +1,5 @@
 import { FaInstagram, FaWhatsapp, FaFacebook, FaEnvelope } from "react-icons/fa";
-import { useEffect, useRef, useState } from "react";
+import useCalendly from "../features/contact/useCalendly";
 import SEO from "../components/SEO";
 
 
@@ -84,62 +84,7 @@ function ContactOptions() {
   );
 }
 function Calendly() {
-  const [shouldLoad, setShouldLoad] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  const CALENDLY_URL =
-    "https://calendly.com/numatravelplan/rdv-telephonique-1?hide_event_type_details=1&hide_gdpr_banner=1";
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        const isVisible = entries.some((e) => e.isIntersecting);
-        if (isVisible) {
-          setShouldLoad(true);
-          io.disconnect();
-        }
-      },
-      { root: null, threshold: 0.15 }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!shouldLoad) return;
-
-    const SCRIPT_SRC = "https://assets.calendly.com/assets/external/widget.js";
-    const existing = document.querySelector(`script[src="${SCRIPT_SRC}"]`) as HTMLScriptElement | null;
-
-    const onMessage = (e: MessageEvent) => {
-      if (typeof e.data === "object" && e.data?.event?.startsWith?.("calendly.")) {
-        setLoading(false);
-      }
-    };
-
-    window.addEventListener("message", onMessage);
-
-    const markLoadedFallback = window.setTimeout(() => setLoading(false), 9000);
-
-    if (!existing) {
-      const script = document.createElement("script");
-      script.src = SCRIPT_SRC;
-      script.async = true;
-      script.onload = () => {
-      };
-      document.body.appendChild(script);
-    }
-
-    return () => {
-      window.removeEventListener("message", onMessage);
-      window.clearTimeout(markLoadedFallback);
-    };
-  }, [shouldLoad]);
+  const { containerRef, shouldLoad, loading, CALENDLY_URL } = useCalendly();
 
   return (
     <div className="w-full md:w-[55%]" ref={containerRef}>
@@ -157,15 +102,6 @@ function Calendly() {
           }`}
         >
           <CalendlySkeleton />
-          <div className="px-6 pb-6">
-            <button
-              type="button"
-              onClick={() => window.open(CALENDLY_URL, "_blank")}
-              className="mt-4 w-full rounded-xl border border-gray-200 px-4 py-3 font-poppins font-medium hover:shadow-sm transition"
-            >
-              Ouvrir Calendly (si ça traîne)
-            </button>
-          </div>
         </div>
 
         {shouldLoad && (
@@ -175,6 +111,15 @@ function Calendly() {
             style={{ minWidth: "320px", height: "500px" }}
           />
         )}
+      </div>
+      <div className="px-6 pb-6 text-center mx-auto">
+        <button
+          type="button"
+          onClick={() => window.open(CALENDLY_URL, "_blank")}
+          className="border border-numa-black mt-6 px-14 py-2 font-delicious text-numa-black rounded hover:bg-numa-black/10 transition"
+        >
+          Ouvrir Calendly sur une nouvelle page
+        </button>
       </div>
     </div>
   );

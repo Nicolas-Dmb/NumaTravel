@@ -1,12 +1,13 @@
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from './components/footer';
-
-import Home from './pages/home';
-import LegalNotice from './pages/legalNotice';
-import CGV from './pages/cgv';
+import { lazy, Suspense } from "react";
 import Header from './components/header';
-import Contact from './pages/contact';
-import Explorer from './pages/explorer';
+
+const Home = lazy(() => import("./pages/home"));
+const Contact = lazy(() => import("./pages/contact"));
+const Explorer = lazy(() => import("./pages/explorer"));
+const LegalNotice = lazy(() => import("./pages/legalNotice"));
+const CGV = lazy(() => import("./pages/cgv"));
 
 import ScrollToAnchor from './utils/scrollToHash';
 
@@ -17,6 +18,7 @@ export default function App() {
         <Header />
         <div className="relative flex-1">
           <ScrollToAnchor />
+          <Suspense fallback={<div className="p-6">Chargement...</div>}>
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/mentions-legales" element={<LegalNotice />} />
@@ -24,6 +26,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/explorer" element={<Explorer />} />
           </Routes>
+          </Suspense>
         </div>
         <Footer />
       </Router>
