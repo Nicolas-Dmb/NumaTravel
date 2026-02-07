@@ -1,16 +1,26 @@
 import { FaInstagram, FaWhatsapp, FaFacebook, FaEnvelope } from "react-icons/fa";
 import { useEffect, useRef, useState } from "react";
+import SEO from "../components/SEO";
 
 
 export default function Contact(){
     return (
-    <div className="min-h-[calc(100vh-4rem)] py-14 md:px-16 bg-numa-white ">
-        <h1 className="text-[40px] lg:text-[70px] font-bold font-cormorant text-numa-black">Me contacter</h1>
-        <div className="flex flex-col gap-4 mt-8 mx-4 md:flex-row md:gap-8 md:mx-16 lg:mx-32 md:justify-between">
-            <ContactOptions />
-            <Calendly />
+    <>
+      <SEO 
+        title="Contact – Numa Travel | Travel planner"
+        description="Contactez Numa Travel pour échanger sur votre projet de voyage et créer un itinéraire personnalisé, clé en main."
+        canonicalPath="/contact"
+      />
+      <main>
+        <div className="min-h-[calc(100vh-4rem)] py-14 md:px-16 bg-numa-white ">
+            <h1 className="text-[40px] lg:text-[70px] font-bold font-cormorant text-numa-black">Me contacter</h1>
+            <div className="flex flex-col gap-4 mt-8 mx-4 md:flex-row md:gap-8 md:mx-16 lg:mx-32 md:justify-between">
+                <ContactOptions />
+                <Calendly />
+            </div>
         </div>
-    </div>
+      </main>
+    </>
     );
 }
 

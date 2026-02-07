@@ -1,5 +1,3 @@
-# Mentions légales
-
 ## 1. Éditeur du site
 
 Le présent site est édité par :

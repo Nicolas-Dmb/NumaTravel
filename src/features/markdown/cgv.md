@@ -1,5 +1,3 @@
-# Conditions Générales de Vente (CGV)
-
 ## 1. Présentation de l’activité
 
 Les présentes Conditions Générales de Vente (CGV) régissent les prestations proposées par :

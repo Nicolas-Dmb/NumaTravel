@@ -1,6 +1,7 @@
 import { useState } from "react";
 import world_map from "/world_map.svg";
 import useMaps from "../features/explorer/hooks/useMaps.tsx";
+import SEO from "../components/SEO.tsx";
 
 type Destination = {
   id: string;
@@ -20,17 +21,26 @@ export default function Explorer() {
   const [open, setOpen] = useState<Destination | null>(null);
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-numa-white px-4 pt-20 pb-10 md:px-16">
-      <h1 className="font-cormorant text-[40px] md:text-[70px] font-bold text-numa-black">
-        Explorer
-      </h1>
+    <>
+      <SEO 
+        title="Explorer – Numa Travel | Travel planner"
+        description="Découvrez les destinations déjà explorées par Numa Travel et inspirez-vous pour votre prochain voyage sur mesure."
+        canonicalPath="/explorer"
+      />
+      <main>
+        <div className="min-h-[calc(100vh-4rem)] bg-numa-white px-4 pt-20 pb-10 md:px-16">
+          <h1 className="font-cormorant text-[40px] md:text-[70px] font-bold text-numa-black">
+            Explorer
+          </h1>
 
-      <div className="mx-auto w-full bg-numa-red rounded-3xl">
-        <WorldMap destinations={destinations} onSelect={setOpen} />
-      </div>
+          <div className="mx-auto w-full bg-numa-red rounded-3xl">
+            <WorldMap destinations={destinations} onSelect={setOpen} />
+          </div>
 
-      {open && <AlbumModal destination={open} onClose={() => setOpen(null)} />}
-    </div>
+          {open && <AlbumModal destination={open} onClose={() => setOpen(null)} />}
+        </div>
+      </main>
+    </>
   );
 }
 
