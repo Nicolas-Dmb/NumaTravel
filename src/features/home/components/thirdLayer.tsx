@@ -5,8 +5,9 @@ import activites from '../assets/activity.webp';
 import carnet from '../assets/carnet.webp';
 import assistance from '../assets/assistance.webp';
 import React from 'react';
+
 import useDevice from '../../../hook/useDevice';
-import { useEffect, useRef } from "react";
+import useAutoMarqueeScroll from "../hooks/useAutoMarqueeScroll";
 
 export default function ThirdLayer(){
     
@@ -88,50 +89,30 @@ function laptopCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guid
     );
 }
 
-function MobileCardLayout({ itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard }: LayoutProps) {
+function MobileCardLayout({
+  itineraryCard,
+  flyCard,
+  hotelCard,
+  activityCard,
+  guideCard,
+  supportCard,
+}: LayoutProps) {
   const cards = [itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard];
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    el.scrollLeft = el.scrollWidth / 4;
-  }, []);
-
-  const handleScroll = () => {
-    const el = scrollerRef.current;
-    if (!el) return;
-
-    const max = el.scrollWidth - el.clientWidth;
-
-    const THRESHOLD = 80;
-
-    if (el.scrollLeft > max - THRESHOLD) {
-      el.scrollLeft = el.scrollWidth / 4;
-    }
-
-    if (el.scrollLeft < THRESHOLD) {
-      el.scrollLeft = el.scrollWidth / 4;
-    }
-  };
+  const { scrollerRef, cycleRef, userInteracted, interactionHandlers } =
+    useAutoMarqueeScroll({ speedPxPerSec: 40, thresholdPx: 80 });
 
   return (
     <div className="w-full px-4">
-      <div className="group overflow-hidden">
+      <div className="overflow-hidden">
         <div
           ref={scrollerRef}
-          onScroll={handleScroll}
+          {...interactionHandlers}
           className="hide-scrollbar overflow-x-auto"
+          style={{ WebkitOverflowScrolling: "touch" }} 
         >
-          <div
-            className="
-              flex flex-nowrap w-max py-2
-              animate-marquee
-              group-hover:[animation-play-state:paused]
-              group-focus-within:[animation-play-state:paused]
-            "
-          >
-            <div className="flex flex-nowrap gap-6 flex-none pr-6">
+          <div className="flex flex-nowrap w-max py-2">
+            <div ref={cycleRef} className="flex flex-nowrap gap-6 flex-none pr-6">
               {cards.map((card, i) => (
                 <div key={`a-${i}`} className="w-[260px] sm:w-[300px] md:w-[340px] flex-none">
                   {card}
@@ -139,20 +120,21 @@ function MobileCardLayout({ itineraryCard, flyCard, hotelCard, activityCard, gui
               ))}
             </div>
 
-            <div className="flex flex-nowrap gap-6 flex-none">
-              {cards.map((card, i) => (
-                <div key={`b-${i}`} className="w-[260px] sm:w-[300px] md:w-[340px] flex-none">
-                  {card}
-                </div>
-              ))}
-            </div>
+            {!userInteracted && (
+              <div className="flex flex-nowrap gap-6 flex-none">
+                {cards.map((card, i) => (
+                  <div key={`b-${i}`} className="w-[260px] sm:w-[300px] md:w-[340px] flex-none">
+                    {card}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
 
 
 function touchpadCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard}:LayoutProps) {

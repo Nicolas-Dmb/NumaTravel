@@ -1,5 +1,6 @@
 
 import useDevice from "../../../hook/useDevice";
+import useAutoMarqueeScroll from "../hooks/useAutoMarqueeScroll";
 
 export default function SixthLayer() {
   const { islaptop, istouchpad } = useDevice();
@@ -45,36 +46,7 @@ export default function SixthLayer() {
       <div className="h-1 w-[30vw] bg-numa-red mx-auto mt-4 mb-6 lg:mb-10"></div>
 
       {!islaptop && !istouchpad && (
-        <div className="w-full">
-          <div className="group overflow-hidden">
-            <div className="hide-scrollbar overflow-x-auto">
-              <div
-                className="
-                  flex flex-nowrap w-max py-2
-                  animate-marquee
-                  group-hover:[animation-play-state:paused]
-                  group-focus-within:[animation-play-state:paused]
-                "
-              >
-                <div className="flex flex-nowrap gap-10 flex-none pr-10">
-                  {steps.map((s) => (
-                    <div key={`a-${s.title}`} className="flex-none">
-                      <TicketCard title={s.title} description={s.description} />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-nowrap gap-10 flex-none">
-                  {steps.map((s) => (
-                    <div key={`b-${s.title}`} className="flex-none">
-                      <TicketCard title={s.title} description={s.description} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <MobileCardLayout steps={steps} />
       )}
 
       {istouchpad && (
@@ -93,6 +65,48 @@ export default function SixthLayer() {
         </div>
       )}
     </section>
+  );
+}
+
+function MobileCardLayout({
+  steps,
+}: {
+  steps: { title: string; description: string }[];
+}) {
+  const { scrollerRef, cycleRef, userInteracted, interactionHandlers } =
+    useAutoMarqueeScroll({ speedPxPerSec: 40, thresholdPx: 80 });
+
+  return (
+    <div className="w-full">
+      <div className="overflow-hidden">
+        <div
+          ref={scrollerRef}
+          {...interactionHandlers}
+          className="hide-scrollbar overflow-x-auto"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          <div className="flex flex-nowrap w-max py-2">
+            <div ref={cycleRef} className="flex flex-nowrap gap-10 flex-none pr-10">
+              {steps.map((s) => (
+                <div key={`a-${s.title}`} className="flex-none">
+                  <TicketCard title={s.title} description={s.description} />
+                </div>
+              ))}
+            </div>
+
+            {!userInteracted && (
+              <div className="flex flex-nowrap gap-10 flex-none">
+                {steps.map((s) => (
+                  <div key={`b-${s.title}`} className="flex-none">
+                    <TicketCard title={s.title} description={s.description} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

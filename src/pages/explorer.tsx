@@ -105,6 +105,10 @@ function WorldMap({
               >
                 <circle cx={d.x} cy={d.y} r="5" fill="numa-black" opacity="0.12" />
                 <circle cx={d.x} cy={d.y} r="2" fill="numa-black" />
+                {/*
+                  City labels temporarily disabled.
+                  Showing only the marker to encourage interaction (hover / click)
+                  and avoid visual clutter on the map.
                 <text
                   x={d.x}
                   y={d.y - 5}
@@ -114,7 +118,7 @@ function WorldMap({
                   opacity="0.85"
                 >
                   {d.name}
-                </text>
+                </text> */}
               </g>
             ))}
           </svg>
