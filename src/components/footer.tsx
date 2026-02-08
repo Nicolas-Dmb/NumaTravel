@@ -13,7 +13,7 @@ export default function Footer() {
                 </div>
                 <div className="flex flex-row gap-4">
                     <FaInstagram className="text-numa-white text-2xl cursor-pointer hover:scale-105" onClick={() => window.open("https://www.instagram.com/numatravelplan/", "_blank")} />
-                    <FaWhatsapp className="text-numa-white text-2xl cursor-pointer hover:scale-105" onClick={() => window.open("https://wa.me/0659589733", "_blank")} />
+                    <FaWhatsapp className="text-numa-white text-2xl cursor-pointer hover:scale-105" onClick={() => window.open("https://wa.me/330659589733", "_blank")} />
                     <FaFacebook className="text-numa-white text-2xl cursor-pointer hover:scale-105" onClick={() => window.open("https://www.facebook.com/profile.php?id=61585037937716", "_blank")} />
                 </div>
         </footer>

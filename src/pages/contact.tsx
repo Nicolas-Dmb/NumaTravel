@@ -37,7 +37,7 @@ function ContactOptions() {
       </div>
       <button
         type="button"
-        onClick={() => window.open("https://wa.me/0659589733", "_blank")}
+        onClick={() => window.open("https://wa.me/330659589733", "_blank")}
         className="flex items-center gap-3 rounded-xl border border-gray-200 p-4 hover:shadow-sm transition"
       >
         <FaWhatsapp className="text-numa-red text-2xl" />
