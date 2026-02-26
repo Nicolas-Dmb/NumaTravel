@@ -1,108 +1,58 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-type AutoMarqueeOptions = {
-  speedPxPerSec?: number;
-  thresholdPx?: number;
-};
+export default function useAutoScrollPingPong(speedPxPerSec = 40) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const raf = useRef<number | null>(null);
+  const last = useRef<number | null>(null);
+  const dir = useRef<1 | -1>(1);
+  const [paused, setPaused] = useState(false);
 
-export default function useAutoMarqueeScroll(options: AutoMarqueeOptions = {}) {
-  const { speedPxPerSec = 40, thresholdPx = 80 } = options;
-
-  const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const cycleRef = useRef<HTMLDivElement | null>(null);
-
-  const [userInteracted, setUserInteracted] = useState(false);
-  const pendingManualScrollLeftRef = useRef<number | null>(null);
-
-  const rafIdRef = useRef<number | null>(null);
-  const lastTsRef = useRef<number | null>(null);
+  const stop = () => {
+    if (raf.current) cancelAnimationFrame(raf.current);
+    raf.current = null;
+    last.current = null;
+  };
 
   useEffect(() => {
-    const el = scrollerRef.current;
+    const el = ref.current;
     if (!el) return;
-    if (!userInteracted) el.scrollLeft = el.scrollWidth / 4;
-  }, [userInteracted]);
 
-  useEffect(() => {
-    const el = scrollerRef.current;
-    const cycle = cycleRef.current;
-    if (!el || !cycle) return;
-
-    const stop = () => {
-      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-      rafIdRef.current = null;
-      lastTsRef.current = null;
-    };
-
-    if (userInteracted) {
+    if (paused) {
       stop();
       return;
     }
 
     const tick = (ts: number) => {
-      if (lastTsRef.current == null) lastTsRef.current = ts;
-      const dt = (ts - lastTsRef.current) / 1000;
-      lastTsRef.current = ts;
-
-      el.scrollLeft += speedPxPerSec * dt;
+      if (last.current == null) last.current = ts;
+      const dt = (ts - last.current) / 1000;
+      last.current = ts;
 
       const max = el.scrollWidth - el.clientWidth;
+      if (max <= 0) return;
 
-      if (el.scrollLeft > max - thresholdPx) el.scrollLeft = el.scrollWidth / 4;
-      if (el.scrollLeft < thresholdPx) el.scrollLeft = el.scrollWidth / 4;
+      el.scrollLeft += dir.current * speedPxPerSec * dt;
 
-      rafIdRef.current = requestAnimationFrame(tick);
+      if (el.scrollLeft >= max) {
+        el.scrollLeft = max;
+        dir.current = -1;
+      } else if (el.scrollLeft <= 0) {
+        el.scrollLeft = 0;
+        dir.current = 1;
+      }
+
+      raf.current = requestAnimationFrame(tick);
     };
 
-    rafIdRef.current = requestAnimationFrame(tick);
-
+    raf.current = requestAnimationFrame(tick);
     return stop;
-  }, [userInteracted, speedPxPerSec, thresholdPx]);
-
-  const disableAutoPremium = () => {
-    if (userInteracted) return;
-
-    const el = scrollerRef.current;
-    const cycle = cycleRef.current;
-
-    if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-    rafIdRef.current = null;
-    lastTsRef.current = null;
-
-    if (!el || !cycle) {
-      setUserInteracted(true);
-      return;
-    }
-
-    const cycleWidth = cycle.scrollWidth;
-    const normalized = cycleWidth > 0 ? el.scrollLeft % cycleWidth : el.scrollLeft;
-
-    pendingManualScrollLeftRef.current = normalized;
-    setUserInteracted(true);
-  };
-
-  useLayoutEffect(() => {
-    const el = scrollerRef.current;
-    const target = pendingManualScrollLeftRef.current;
-    if (!el || target == null) return;
-
-    requestAnimationFrame(() => {
-      el.scrollLeft = target;
-      pendingManualScrollLeftRef.current = null;
-    });
-  }, [userInteracted]);
+  }, [paused, speedPxPerSec]);
 
   const interactionHandlers = {
-    onTouchStart: disableAutoPremium,
-    onPointerDown: disableAutoPremium,
-    onMouseDown: disableAutoPremium,
-    onWheel: disableAutoPremium,
+    onTouchStart: () => setPaused(true),
+    onPointerDown: () => setPaused(true),
+    onMouseDown: () => setPaused(true),
+    onWheel: () => setPaused(true),
   };
 
-  return {
-    scrollerRef,
-    cycleRef,
-    userInteracted,
-    interactionHandlers,
-  };
+  return { scrollerRef: ref, paused, setPaused, interactionHandlers };
 }

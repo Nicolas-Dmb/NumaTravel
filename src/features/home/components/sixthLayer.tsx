@@ -1,6 +1,6 @@
 
 import useDevice from "../../../hook/useDevice";
-import useAutoMarqueeScroll from "../hooks/useAutoMarqueeScroll";
+import useAutoScrollPingPong from "../hooks/useAutoMarqueeScroll";
 
 export default function SixthLayer() {
   const { islaptop, istouchpad } = useDevice();
@@ -68,13 +68,9 @@ export default function SixthLayer() {
   );
 }
 
-function MobileCardLayout({
-  steps,
-}: {
-  steps: { title: string; description: string }[];
-}) {
-  const { scrollerRef, cycleRef, userInteracted, interactionHandlers } =
-    useAutoMarqueeScroll({ speedPxPerSec: 40, thresholdPx: 80 });
+function MobileCardLayout({ steps }: { steps: { title: string; description: string }[] }) {
+  const { scrollerRef, interactionHandlers } = useAutoScrollPingPong(40);
+
 
   return (
     <div className="w-full">
@@ -85,30 +81,21 @@ function MobileCardLayout({
           className="hide-scrollbar overflow-x-auto"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
-          <div className="flex flex-nowrap w-max py-2">
-            <div ref={cycleRef} className="flex flex-nowrap gap-10 flex-none pr-10">
-              {steps.map((s) => (
-                <div key={`a-${s.title}`} className="flex-none">
-                  <TicketCard title={s.title} description={s.description} />
-                </div>
-              ))}
-            </div>
-
-            {!userInteracted && (
-              <div className="flex flex-nowrap gap-10 flex-none">
-                {steps.map((s) => (
-                  <div key={`b-${s.title}`} className="flex-none">
-                    <TicketCard title={s.title} description={s.description} />
-                  </div>
-                ))}
+           <div className="flex flex-nowrap w-max py-2">
+            <div className="flex flex-nowrap gap-10 flex-none pr-10">
+            {steps.map((s, i) => (
+              <div key={i} className="flex-none">
+                <TicketCard title={s.title} description={s.description} />
               </div>
-            )}
+            ))}
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 
 interface PropsCard{

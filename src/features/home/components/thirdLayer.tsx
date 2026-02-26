@@ -7,7 +7,7 @@ import assistance from '../assets/assistance.webp';
 import React from 'react';
 
 import useDevice from '../../../hook/useDevice';
-import useAutoMarqueeScroll from "../hooks/useAutoMarqueeScroll";
+import useAutoScrollPingPong from "../hooks/useAutoMarqueeScroll";
 
 export default function ThirdLayer(){
     
@@ -99,8 +99,7 @@ function MobileCardLayout({
 }: LayoutProps) {
   const cards = [itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard];
 
-  const { scrollerRef, cycleRef, userInteracted, interactionHandlers } =
-    useAutoMarqueeScroll({ speedPxPerSec: 40, thresholdPx: 80 });
+  const { scrollerRef, interactionHandlers } = useAutoScrollPingPong(40);
 
   return (
     <div className="w-full px-4">
@@ -109,32 +108,21 @@ function MobileCardLayout({
           ref={scrollerRef}
           {...interactionHandlers}
           className="hide-scrollbar overflow-x-auto"
-          style={{ WebkitOverflowScrolling: "touch" }} 
+          style={{ WebkitOverflowScrolling: "touch" }}
         >
-          <div className="flex flex-nowrap w-max py-2">
-            <div ref={cycleRef} className="flex flex-nowrap gap-6 flex-none pr-6">
+           <div className="flex flex-nowrap gap-6 w-max py-2">
               {cards.map((card, i) => (
-                <div key={`a-${i}`} className="w-[260px] sm:w-[300px] md:w-[340px] flex-none">
+                <div key={i} className="w-[260px] sm:w-[300px] md:w-[340px] flex-none">
                   {card}
                 </div>
               ))}
             </div>
-
-            {!userInteracted && (
-              <div className="flex flex-nowrap gap-6 flex-none">
-                {cards.map((card, i) => (
-                  <div key={`b-${i}`} className="w-[260px] sm:w-[300px] md:w-[340px] flex-none">
-                    {card}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 
 function touchpadCardLayout({itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard}:LayoutProps) {
