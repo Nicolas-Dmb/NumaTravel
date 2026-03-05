@@ -25,6 +25,7 @@ export default function App() {
             <Route path="/cgv" element={<CGV />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/explorer" element={<Explorer />} />
+            <Route path='/go' element={<Home />} />
           </Routes>
           </Suspense>
         </div>
