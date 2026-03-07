@@ -1,6 +1,5 @@
 
 import useDevice from "../../../hook/useDevice";
-import useAutoScrollPingPong from "../hooks/useAutoMarqueeScroll";
 
 export default function SixthLayer() {
   const { islaptop, istouchpad } = useDevice();
@@ -69,15 +68,12 @@ export default function SixthLayer() {
 }
 
 function MobileCardLayout({ steps }: { steps: { title: string; description: string }[] }) {
-  const { scrollerRef, interactionHandlers } = useAutoScrollPingPong(40);
 
 
   return (
     <div className="w-full">
       <div className="overflow-hidden">
         <div
-          ref={scrollerRef}
-          {...interactionHandlers}
           className="hide-scrollbar overflow-x-auto"
           style={{ WebkitOverflowScrolling: "touch" }}
         >

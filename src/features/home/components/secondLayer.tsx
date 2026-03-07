@@ -9,7 +9,7 @@ export default function SecondLayer(){
                     Chaque voyage est unique
                 </h1>
                 <div className="mb-6 h-1 w-[20vw] mt-4 bg-numa-red mx-auto"></div>
-                <p className="mb-0 md:mb-6 max-w-lg font-poppins text-[12px] md:text-[18px]">
+                <p className="mb-0 px-5 md:px-0 md:mb-6 max-w-lg font-poppins text-[12px] md:text-[18px]">
                     Je vous aide à transformer vos envies en aventures sur mesure, sans
                     stress, avec des itinéraires pensés pour vous, vos goûts et votre
                     rythme. Profitez de chaque instant, je m’occupe du reste.

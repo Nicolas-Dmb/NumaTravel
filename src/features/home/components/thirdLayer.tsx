@@ -7,7 +7,6 @@ import assistance from '../assets/assistance.webp';
 import React from 'react';
 
 import useDevice from '../../../hook/useDevice';
-import useAutoScrollPingPong from "../hooks/useAutoMarqueeScroll";
 
 export default function ThirdLayer(){
     
@@ -99,14 +98,10 @@ function MobileCardLayout({
 }: LayoutProps) {
   const cards = [itineraryCard, flyCard, hotelCard, activityCard, guideCard, supportCard];
 
-  const { scrollerRef, interactionHandlers } = useAutoScrollPingPong(40);
-
   return (
     <div className="w-full px-4">
       <div className="overflow-hidden">
         <div
-          ref={scrollerRef}
-          {...interactionHandlers}
           className="hide-scrollbar overflow-x-auto"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
