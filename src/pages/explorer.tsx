@@ -2,31 +2,21 @@ import { useState } from "react";
 import world_map from "/world_map.svg";
 import useMaps from "../features/explorer/hooks/useMaps.tsx";
 import SEO from "../components/SEO.tsx";
+import { destinations, type Destination } from "../features/explorer/destination.tsx";
 
-type Destination = {
-  id: string;
-  name: string;
-  x: number;
-  y: number;
-  photos: string[];
-};
 
-const destinations: Destination[] = [
-  { id: "paris", name: "Paris", x: 470, y: 130, photos: [] },
-  { id: "quebec", name: "Quebec", x: 300, y: 130, photos: ["/album/quebec/1.jpg","/album/quebec/2.jpg","/album/quebec/3.jpg","/album/quebec/4.jpg"] },
-  { id: "chiang_mai", name: "Chiang Mai", x: 700, y: 200, photos: ["/album/chiang_mai/1.jpg","/album/chiang_mai/2.jpg","/album/chiang_mai/3.jpg","/album/chiang_mai/4.jpg"] },
-];
 
 export default function Explorer() {
   const [open, setOpen] = useState<Destination | null>(null);
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Explorer – Numa Travel | Travel planner"
         description="Découvrez les destinations déjà explorées par Numa Travel et inspirez-vous pour votre prochain voyage sur mesure."
         canonicalPath="/explorer"
       />
+
       <main>
         <div className="min-h-[calc(100vh-4rem)] bg-numa-white px-4 pt-20 pb-10 md:px-16">
           <h1 className="font-cormorant text-[40px] md:text-[70px] font-bold text-numa-black">
@@ -37,7 +27,9 @@ export default function Explorer() {
             <WorldMap destinations={destinations} onSelect={setOpen} />
           </div>
 
-          {open && <AlbumModal destination={open} onClose={() => setOpen(null)} />}
+          {open && (
+            <AlbumModal destination={open} onClose={() => setOpen(null)} />
+          )}
         </div>
       </main>
     </>
@@ -45,14 +37,24 @@ export default function Explorer() {
 }
 
 function WorldMap({
-    destinations,
-    onSelect,
-  }: {
-    destinations: Destination[];
-    onSelect: (d: Destination) => void;
-  }) {
-  
-  const { blockPanRef,movedRef, viewportRef, tx, ty, scale, viewBox, onPointerDown, onPointerMove, onPointerUp } = useMaps();
+  destinations,
+  onSelect,
+}: {
+  destinations: Destination[];
+  onSelect: (d: Destination) => void;
+}) {
+  const {
+    blockPanRef,
+    movedRef,
+    viewportRef,
+    tx,
+    ty,
+    scale,
+    viewBox,
+    onPointerDown,
+    onPointerMove,
+    onPointerUp,
+  } = useMaps();
 
   return (
     <div className="relative">
@@ -99,26 +101,12 @@ function WorldMap({
                 }}
                 onPointerDown={(e) => {
                   e.stopPropagation();
-                  blockPanRef.current = true;   
-                  movedRef.current = false; 
+                  blockPanRef.current = true;
+                  movedRef.current = false;
                 }}
               >
-                <circle cx={d.x} cy={d.y} r="5" fill="numa-black" opacity="0.12" />
-                <circle cx={d.x} cy={d.y} r="2" fill="numa-black" />
-                {/*
-                  City labels temporarily disabled.
-                  Showing only the marker to encourage interaction (hover / click)
-                  and avoid visual clutter on the map.
-                <text
-                  x={d.x}
-                  y={d.y - 5}
-                  textAnchor="middle"
-                  fontSize="8"
-                  fill="numa-black"
-                  opacity="0.85"
-                >
-                  {d.name}
-                </text> */}
+                <circle cx={d.x} cy={d.y} r="5" fill="#111111" opacity="0.12" />
+                <circle cx={d.x} cy={d.y} r="2" fill="#111111" />
               </g>
             ))}
           </svg>
@@ -127,7 +115,6 @@ function WorldMap({
     </div>
   );
 }
-
 
 function AlbumModal({
   destination,
@@ -138,7 +125,9 @@ function AlbumModal({
 }) {
   return (
     <div
-      className="fixed inset-0 z-50 bg-numa-black/40 p-4 flex items-center justify-center">
+      className="fixed inset-0 z-50 bg-numa-black/40 p-4 flex items-center justify-center"
+      onClick={onClose}
+    >
       <div
         className="w-full h-[80vh] max-w-4xl rounded-3xl bg-numa-white p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
@@ -147,6 +136,7 @@ function AlbumModal({
           <h2 className="font-poppins text-lg font-semibold text-numa-black">
             {destination.name}
           </h2>
+
           <button
             onClick={onClose}
             className="rounded-full px-3 py-1 text-sm font-semibold text-numa-black hover:bg-black/5"
@@ -155,18 +145,25 @@ function AlbumModal({
           </button>
         </div>
 
-        <div className="mt-6 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [-webkit-overflow-scrolling:touch]">
-          {destination.photos.map((src) => (
-            <img
-              key={src}
-              src={src}
-              alt={destination.name}
-              className="h-[60vh] w-auto flex-none snap-center rounded-2xl object-cover"
-              loading="lazy"
-              draggable={false}
-            />
-          ))}
-        </div>
+        {destination.photos.length > 0 ? (
+          <div className="mt-6 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [-webkit-overflow-scrolling:touch]">
+            {destination.photos.map((src, index) => (
+              <img
+                key={src}
+                src={src}
+                alt={`${destination.name} ${index + 1}`}
+                className="h-[60vh] w-auto flex-none snap-center rounded-2xl object-cover"
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                draggable={false}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="mt-6 text-sm text-numa-black/70">
+            Aucune photo pour cette destination.
+          </p>
+        )}
       </div>
     </div>
   );
