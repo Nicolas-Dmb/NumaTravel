@@ -36,9 +36,7 @@ jobs:
 
       - name: Deploy to server
         run: |
-          - name: Deploy to server
-  run: |
-    rsync -rlvz --delete --omit-dir-times --no-times \
-      -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519" \
-      dist/ \
-      ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/projects/numa-travel/front/
+          rsync -rlvz --delete --omit-dir-times --no-times \
+            -e "ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/id_ed25519" \
+            dist/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/projects/numa-travel/front/
