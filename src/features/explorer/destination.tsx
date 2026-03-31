@@ -41,8 +41,7 @@ export const destinations: Destination[] = [
       "/album/chiang_mai/1.jpg",
       "/album/chiang_mai/2.jpg",
       "/album/chiang_mai/3.jpg",
-      "/album/chiang_mai/4.jpg",
-      "/album/chiang_mai/5.JPG",
+      "/album/chiang_mai/4.JPG",
     ],
   },
   {
