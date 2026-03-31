@@ -6,6 +6,7 @@ export type Destination = {
   photos: string[];
 };
 
+
 export const destinations: Destination[] = [
   {
     id: "paris",
@@ -41,7 +42,7 @@ export const destinations: Destination[] = [
       "/album/chiang_mai/1.jpg",
       "/album/chiang_mai/2.jpg",
       "/album/chiang_mai/3.jpg",
-      "/album/chiang_mai/4.JPG",
+      "/album/chiang_mai/4.jpg",
     ],
   },
   {
