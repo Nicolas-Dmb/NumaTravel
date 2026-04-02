@@ -36,11 +36,11 @@ export default class FormResponse {
         const normalizedPhone = phone || undefined;
 
         return new FormResponse(
-        firstName,
-        secondName,
-        email,
-        message,
-        normalizedPhone
+            firstName,
+            secondName,
+            email,
+            message,
+            normalizedPhone
         );
   }
 
