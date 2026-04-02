@@ -2,6 +2,7 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from './components/footer';
 import { lazy, Suspense } from "react";
 import Header from './components/header';
+import MetaContact from "./pages/metaForms";
 
 const Home = lazy(() => import("./pages/home"));
 const Contact = lazy(() => import("./pages/contact"));
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/explorer" element={<Explorer />} />
             <Route path='/go' element={<Home />} />
+            <Route path='/meta-contact' element={<MetaContact />} />
           </Routes>
           </Suspense>
         </div>
