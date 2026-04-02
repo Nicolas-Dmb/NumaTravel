@@ -29,8 +29,8 @@ export default class FormResponse {
         if (!message) throw new Error("Le message est requis");
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-        throw new Error("Format d'email invalide");
+            if (!emailRegex.test(email)) {
+            throw new Error("Format d'email invalide");
         }
 
         const normalizedPhone = phone || undefined;
