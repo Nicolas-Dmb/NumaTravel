@@ -6,6 +6,7 @@ import sendForm from '../repositories/sendForm';
 export default function useMeta(){
     const [formResponse, setFormResponse] = useState<FormResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     function _ValidateFormData(formData: FormData): FormResponse | null {
@@ -28,17 +29,19 @@ export default function useMeta(){
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>){
         event.preventDefault();
+        setIsLoading(true);
         console.info("Form submitted, validating data...");
         const formData = new FormData(event.currentTarget);
         const formResponse = _ValidateFormData(formData);
         if(formResponse == null){
+            setIsLoading(false);
             return;
         }
         try{
             const [status, message] = await sendForm(formResponse);
             if(status === 200){
                 console.info("Form submission successful:", message);
-                navigate("/meta/success");
+                navigate("/meta-contact/success");
             }else{
                 console.error("Form submission failed with status:", status, "and message:", message);
                 _errorNavigate();
@@ -46,6 +49,8 @@ export default function useMeta(){
         }catch(error){
             console.error("An error occurred while sending the form:", error);
             _errorNavigate();
+        }finally{
+            setIsLoading(false);
         }
     } 
 
@@ -60,5 +65,6 @@ export default function useMeta(){
     return {
         error, 
         handleSubmit,
+        isLoading
     }
 }
