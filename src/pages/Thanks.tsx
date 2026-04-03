@@ -29,7 +29,7 @@ export default function Thanks({ setMetaRoutes }: ThanksProps){
                 autoplay
                 className="w-48 h-48 mb-4"
             />
-            <p className="text-lg font-delicious text-numa-black">Je vous répondrai dans les plus brefs délais.</p>
+            <p className="text-lg font-delicious text-numa-black">Hâte d'échanger un peu plus avec vous 😊</p>
         </div>
     </main>
     )

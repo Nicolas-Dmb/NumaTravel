@@ -11,7 +11,7 @@ export default function ContactForm() {
                 className="rounded-2xl shadow-md p-6 flex flex-col gap-5 bg-white"
             >
                 <h2 className="text-xl font-semibold text-center">
-                    Parlez-moi de votre projet, de vos envies ou de vos questions 😊
+                    Parlez-moi de votre projet, de vos envies ou posez-moi vos questions !
                 </h2>
 
                 <div className="flex gap-4 flex-col sm:flex-row">
@@ -59,7 +59,7 @@ export default function ContactForm() {
                     <textarea
                         name="message"
                         rows={3}
-                        placeholder="Parlez-moi de votre projet de voyage, ou de vos questions"
+                        placeholder="Parlez-moi de votre projet, de vos envies ou posez-moi vos questions !"
                         className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition resize-none"
                     />
                 </div>

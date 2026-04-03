@@ -1,12 +1,14 @@
 import ReactMarkdown from "react-markdown";
 import cgv from "../features/markdown/cgv.md?raw";
 import SEO from "../components/SEO";
+import { useNavigate } from "react-router-dom";
 
 interface CGVProps {
     isMetaRoutes: boolean;
 }
 
 export default function CGV({ isMetaRoutes }: CGVProps){
+    const navigate = useNavigate();
     return(
         <>
             <SEO
@@ -17,7 +19,7 @@ export default function CGV({ isMetaRoutes }: CGVProps){
             <main>
                 <article className="legal font-poppins text-numa-black leading-relaxed bg-numa-white  p-16 md:p-24 min-h-screen">
                     {isMetaRoutes && (
-                        <div className="h-16 text-[16px] font-poppins text-numa-black hover:text-numa-red cursor-pointer" onClick={() => window.history.back()}>
+                        <div className="h-16 text-[16px] font-poppins text-numa-black hover:text-numa-red cursor-pointer" onClick={() => navigate('/meta-contact')}>
                             ← retour
                         </div>
                     )}
