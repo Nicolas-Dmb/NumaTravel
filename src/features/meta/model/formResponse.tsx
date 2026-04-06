@@ -1,4 +1,15 @@
 
+
+export const CookieConsent = {
+  ACCEPTED: "accepted",
+  REFUSED: "refused",
+  UNSET: "unset",
+} as const;
+
+export type CookieConsent =
+  typeof CookieConsent[keyof typeof CookieConsent];
+
+
 export default class FormResponse {
     firstName: string;
     secondName: string;

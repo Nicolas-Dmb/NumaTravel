@@ -1,9 +1,11 @@
-import useMeta from '../hooks/useMeta';
 
-export default function ContactForm() {
-    const { error, handleSubmit, isLoading } = useMeta();
+interface ContactFormProps {
+   error : string | null;
+   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+   isLoading: boolean;
+}
 
-
+export default function ContactForm({ error, handleSubmit, isLoading }: ContactFormProps) {
     return (
         <div className="flex flex-col justify-center font-poppins text-numa-black px-4 pb-16 w-full max-w-2xl mx-auto">
             <form
@@ -14,42 +16,42 @@ export default function ContactForm() {
                     Parlez-moi de votre projet, de vos envies ou posez-moi vos questions !
                 </h2>
 
-                <div className="flex gap-4 flex-col sm:flex-row">
-                    <div className="flex flex-col w-full">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div className="flex flex-col">
                         <label className="text-sm mb-1">Nom</label>
                         <input
                             type="text"
                             name="secondName"
-                            className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
                         />
                     </div>
 
-                    <div className="flex flex-col w-full">
+                    <div className="flex flex-col">
                         <label className="text-sm mb-1">Prénom</label>
                         <input
                             type="text"
                             name="firstName"
-                            className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
                         />
                     </div>
                 </div>
 
-                <div className="flex gap-4 flex-col sm:flex-row">
-                    <div className="flex flex-col w-full">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div className="flex flex-col">
                         <label className="text-sm mb-1">Email</label>
                         <input
                             type="email"
                             name="email"
-                            className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
                         />
                     </div>
 
-                    <div className="flex flex-col w-full">
+                    <div className="flex flex-col">
                         <label className="text-sm mb-1">Téléphone (optionnel)</label>
                         <input
                             type="tel"
                             name="phone"
-                            className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
+                            className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
                         />
                     </div>
                 </div>
