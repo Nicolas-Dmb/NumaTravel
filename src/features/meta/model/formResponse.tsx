@@ -12,14 +12,14 @@ export type CookieConsent =
 
 export default class FormResponse {
     firstName: string;
-    secondName: string;
+    lastName: string;
     email: string;
     phone?: string;
     message: string;
 
-    constructor( firstName: string, secondName: string, email: string, message: string, phone?: string) {
+    constructor( firstName: string, lastName: string, email: string, message: string, phone?: string) {
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.message = message;
@@ -29,12 +29,12 @@ export default class FormResponse {
         const data = Object.fromEntries(formData.entries());
 
         const firstName = String(data.firstName ?? "").trim();
-        const secondName = String(data.secondName ?? "").trim();
+        const lastName = String(data.lastName ?? "").trim();
         const email = String(data.email ?? "").trim();
         const message = String(data.message ?? "").trim();
         const phone = String(data.phone ?? "").trim();
 
-        if (!secondName) throw new Error("Le nom est requis");
+        if (!lastName) throw new Error("Le nom est requis");
         if (!firstName) throw new Error("Le prénom est requis");
         if (!email) throw new Error("L'email est requis");
         if (!message) throw new Error("Le message est requis");
@@ -48,7 +48,7 @@ export default class FormResponse {
 
         return new FormResponse(
             firstName,
-            secondName,
+            lastName,
             email,
             message,
             normalizedPhone
@@ -58,7 +58,7 @@ export default class FormResponse {
     toJson(): Record<string, string | undefined> {
         return {
             firstName: this.firstName,
-            secondName: this.secondName,
+            lastName: this.lastName,
             email: this.email,
             phone: this.phone,
             message: this.message

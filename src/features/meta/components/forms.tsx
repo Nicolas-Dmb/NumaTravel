@@ -21,7 +21,7 @@ export default function ContactForm({ error, handleSubmit, isLoading }: ContactF
                         <label className="text-sm mb-1">Nom</label>
                         <input
                             type="text"
-                            name="secondName"
+                            name="lastName"
                             className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
                         />
                     </div>

@@ -105,7 +105,7 @@ export default function useForms() {
 
     async function sendFormData(formResponse: FormResponse, showCookiesResponse: CookieConsent){
         try{
-            const [status, message] = await sendForm(formResponse);
+            const { status, message } = await sendForm(formResponse);
             if(status === 200){
                 console.info("Form submission successful:", message);
                 if (showCookiesResponse === CookieConsent.ACCEPTED){
