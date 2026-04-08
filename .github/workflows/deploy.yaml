@@ -25,11 +25,9 @@ jobs:
 
       - name: Build project
         run: npm run build
-
-      - name: generate .env file
-        run: |
-          echo "VITE_META_PIXEL_ID=${{ secrets.VITE_META_PIXEL_ID }}" > .env
-          echo "VITE_API_URL=${{ secrets.VITE_API_URL }}" >> .env
+        env:
+          VITE_META_PIXEL_ID: ${{ vars.VITE_META_PIXEL_ID }}
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
 
       - name: Configure SSH
         run: |
