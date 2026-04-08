@@ -13,12 +13,18 @@ const buttonStyle =
 const subButtonStyle =
   "text-[16px] transform transition-transform duration-300 hover:-translate-y-0.3 hover:scale-105 cursor-pointer font-cormorant font-semibold text-numa-black";
 
-export default function Header() {
+interface HeaderProps {
+  isMetaRoutes: boolean;
+}
+
+
+export default function Header({ isMetaRoutes }: HeaderProps) {
   const { islaptop, istouchpad } = useDevice();
   const scrollDirection = useScrollDirection();
   const { displayServices, open, close, setDisplayServices } = useHeader({ scrollDirection });
   const [seeMore, setSeeMore] = useState(false);
 
+  if (isMetaRoutes) return null;
   return (
     <>
       <section
