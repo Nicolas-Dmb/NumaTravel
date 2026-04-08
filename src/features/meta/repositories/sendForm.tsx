@@ -9,8 +9,9 @@ export default async function sendForm(formResponse: FormResponse): Promise<{ st
         },
         body: JSON.stringify(formResponse)
     });
-    if (!response.status || response.status !== 201) {
+    if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
     }
-    return await response.json();;
+    const data = await response.json();
+    return { status: response.status, message: data.message };  
 }

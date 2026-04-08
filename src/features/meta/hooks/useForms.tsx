@@ -106,7 +106,7 @@ export default function useForms() {
     async function sendFormData(formResponse: FormResponse, showCookiesResponse: CookieConsent){
         try{
             const { status, message } = await sendForm(formResponse);
-            if(status === 200){
+            if(status === 201){
                 console.info("Form submission successful:", message);
                 if (showCookiesResponse === CookieConsent.ACCEPTED){
                     trackMetaLead();
