@@ -34,10 +34,10 @@ export function initMetaPixel(pixelId: string): void {
       if (f.fbq) return;
 
       n = function (...args: any[]) {
-        if (n?.callMethod) {
-          n.callMethod(...args);
+        if (n!.callMethod) {
+          n!.callMethod(...args);
         } else {
-          n?.queue?.push(args);
+          n!.queue!.push(args);
         }
       } as Window["fbq"];
 
@@ -46,12 +46,12 @@ export function initMetaPixel(pixelId: string): void {
         f._fbq = n;
       }
 
-      n.push = (...args: any[]) => {
+      n!.push = (...args: any[]) => {
         n?.queue?.push(...args);
       };
-      n.loaded = true;
-      n.version = "2.0";
-      n.queue = [];
+      n!.loaded = true;
+      n!.version = "2.0";
+      n!.queue = [];
 
       t = b.createElement(e) as HTMLScriptElement;
       t.async = true;
