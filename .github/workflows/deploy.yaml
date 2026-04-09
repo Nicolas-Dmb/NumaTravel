@@ -1,4 +1,4 @@
-name: Deploy Vite to VPS
+name: Deploy Vite to VPS 
 
 on:
   push:
