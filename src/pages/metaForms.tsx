@@ -25,7 +25,7 @@ export default function MetaContact({ setMetaRoutes }: MetaContactProps){
             <ContactForm  error={error} handleSubmit={handleSubmit} isLoading={isLoading} />
             <ThirdLayer />
             <FourthLayer />
-            {showCookies === CookieConsent.UNSET && <CookiesBanner handleBannerAccept={handleBannerAccept} handleBannerRefuse={handleBannerRefuse} />}
+            {showCookies === CookieConsent.UNSET && !displayModalCookies && <CookiesBanner handleBannerAccept={handleBannerAccept} handleBannerRefuse={handleBannerRefuse} />}
         </div>
     </main>
 }
