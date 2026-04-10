@@ -6,8 +6,6 @@ import { setupConsoleErrorTracking } from "./utils/consoleError";
 
 setupConsoleErrorTracking();
 
-console.error("Test d'erreur pour vérifier le tracking");
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
