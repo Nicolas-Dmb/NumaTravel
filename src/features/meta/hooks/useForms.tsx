@@ -1,8 +1,8 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import FormResponse, { CookieConsent } from '../model/formResponse';
 import { useNavigate } from 'react-router-dom';
 import sendForm from '../repositories/sendForm';
-import {trackMetaLead, initMetaPixel} from "./metaPixel";
+import {trackMetaLead, initMetaPixel, generateMetaEventId} from "./metaPixel";
 
 
 export default function useForms() {
@@ -11,6 +11,7 @@ export default function useForms() {
     const [pendingFormResponse, setPendingFormResponse] = useState<FormResponse | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const hasSubmittedRef = useRef(false);
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -35,13 +36,22 @@ export default function useForms() {
     }
 
 
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>){
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>, phone: string | undefined) {
         event.preventDefault();
+
+        if (hasSubmittedRef.current) {
+            console.warn("Form has already been submitted, ignoring duplicate submission.");
+            return;
+        }
+
         setIsLoading(true);
 
         
         console.info("Form submitted, validating data...");
         const formData = new FormData(event.currentTarget);
+        if (phone) {
+            formData.set("phone", phone);
+        }
         const formResponse = _validateFormData(formData);
         if(formResponse == null){
             setIsLoading(false);
@@ -60,6 +70,10 @@ export default function useForms() {
     } 
 
     function handlePopupAccept(){
+        if (hasSubmittedRef.current) {
+            console.warn("Form has already been submitted, ignoring duplicate submission.");
+            return;
+        }
         setIsLoading(true);
         setDisplayModalCookies(false);
 
@@ -77,6 +91,10 @@ export default function useForms() {
     }
 
     function handlePopupRefuse(){
+        if (hasSubmittedRef.current) {
+            console.warn("Form has already been submitted, ignoring duplicate submission.");
+            return;
+        }
         setIsLoading(true);
         setDisplayModalCookies(false);
 
@@ -104,12 +122,22 @@ export default function useForms() {
     }
 
     async function sendFormData(formResponse: FormResponse, showCookiesResponse: CookieConsent){
+        if (hasSubmittedRef.current) {
+            console.warn("Form has already been submitted, ignoring duplicate submission.");
+            return;
+        }
+        hasSubmittedRef.current = true;
+
+        let metaEventId: string | undefined = undefined;
+        if(showCookiesResponse === CookieConsent.ACCEPTED){
+            metaEventId = generateMetaEventId();
+        }
         try{
-            const { status, message } = await sendForm(formResponse);
+            const { status, message } = await sendForm(formResponse, metaEventId);
             if(status === 201){
                 console.info("Form submission successful:", message);
-                if (showCookiesResponse === CookieConsent.ACCEPTED){
-                    trackMetaLead();
+                if (showCookiesResponse === CookieConsent.ACCEPTED && metaEventId) {
+                    trackMetaLead(metaEventId);
                 }
                 navigate("/meta-contact/success");
             }else{
@@ -120,6 +148,7 @@ export default function useForms() {
             console.error("An error occurred while sending the form:", error);
             _errorNavigate();
         }finally{
+            hasSubmittedRef.current = false;
             setIsLoading(false);
             setPendingFormResponse(null);
         }

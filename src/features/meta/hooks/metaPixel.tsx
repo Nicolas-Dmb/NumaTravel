@@ -14,14 +14,10 @@ declare global {
 let isMetaInitialized = false;
 
 export function initMetaPixel(pixelId: string): void {
-  console.log("initMetaPixel called with", pixelId);
-
   if (typeof window === "undefined") return;
   if (!pixelId) return;
 
   if (!window.fbq) {
-    console.log("injecting fbq script");
-
     (function (
       f: Window,
       b: Document,
@@ -46,12 +42,12 @@ export function initMetaPixel(pixelId: string): void {
         f._fbq = n;
       }
 
-      n!.push = (...args: any[]) => {
+      n.push = (...args: any[]) => {
         n?.queue?.push(...args);
       };
-      n!.loaded = true;
-      n!.version = "2.0";
-      n!.queue = [];
+      n.loaded = true;
+      n.version = "2.0";
+      n.queue = [];
 
       t = b.createElement(e) as HTMLScriptElement;
       t.async = true;
@@ -62,19 +58,27 @@ export function initMetaPixel(pixelId: string): void {
     })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
   }
 
-  if (isMetaInitialized) {
-    console.log("Meta Pixel already initialized, skipping init");
-    return;
-  }
+  if (isMetaInitialized) return;
 
-  console.log("calling fbq init");
   window.fbq?.("init", pixelId);
   window.fbq?.("track", "PageView");
 
   isMetaInitialized = true;
 }
 
-export function trackMetaLead(): void {
-  if (!window.fbq || !isMetaInitialized) return;
-  window.fbq("track", "Lead");
+export function generateMetaEventId(): string {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+    return crypto.randomUUID();
+  }
+
+  return `meta_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+}
+
+export function trackMetaLead(eventId: string): void {
+  if (!window.fbq || !isMetaInitialized) {
+    console.warn("Meta Pixel not initialized, cannot track Lead");
+    return;
+  }
+
+  window.fbq("track", "Lead", {}, { eventID: eventId });
 }

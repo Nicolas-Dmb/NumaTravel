@@ -44,6 +44,10 @@ export default class FormResponse {
             throw new Error("Format d'email invalide");
         }
 
+        if (phone && !/^\+\d{6,15}$/.test(phone)) {
+            throw new Error("Format de téléphone invalide");
+        }
+
         const normalizedPhone = phone || undefined;
 
         return new FormResponse(
@@ -55,13 +59,14 @@ export default class FormResponse {
         );
   }
 
-    toJson(): Record<string, string | undefined> {
+    toJson(metaEventId: string | undefined): Record<string, string | undefined> {
         return {
             firstName: this.firstName,
             lastName: this.lastName,
             email: this.email,
             phone: this.phone,
-            message: this.message
+            message: this.message,
+            metaEventId: metaEventId
         }
     }
     
