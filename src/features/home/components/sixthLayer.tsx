@@ -26,7 +26,7 @@ export default function SixthLayer() {
         "Recherche et conseils pour les vols et les logements les plus adaptés à votre itinéraire et à vos critères.",
     },
     {
-      title: "Recommandation des activités & carnet de voyage",
+      title: "Recommandation des activités et carnet de voyage",
       description:
         "Suggestions d’activités et d’expériences, puis création d’un carnet de voyage personnalisé regroupant toutes les informations utiles.",
     },

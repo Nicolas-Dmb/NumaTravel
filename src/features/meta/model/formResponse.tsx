@@ -59,14 +59,16 @@ export default class FormResponse {
         );
   }
 
-    toJson(metaEventId: string | undefined): Record<string, string | undefined> {
+    toJson(metaEventId: string | undefined, fbp: string | undefined, fbc: string | undefined): Record<string, string | undefined> {
         return {
             firstName: this.firstName,
             lastName: this.lastName,
             email: this.email,
             phone: this.phone,
             message: this.message,
-            metaEventId: metaEventId
+            metaEventId: metaEventId,
+            fbp: fbp,
+            fbc: fbc
         }
     }
     

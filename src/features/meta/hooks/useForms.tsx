@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef} from 'react';
 import FormResponse, { CookieConsent } from '../model/formResponse';
 import { useNavigate } from 'react-router-dom';
 import sendForm from '../repositories/sendForm';
-import {trackMetaLead, initMetaPixel, generateMetaEventId} from "./metaPixel";
-
+import { trackMetaLead, initMetaPixel, generateMetaEventId, getMetaBrowserData } from "./metaPixel";
 
 export default function useForms() {
     const [showCookies, setShowCookies] = useState<CookieConsent>(localStorage.getItem("cookieConsent") as CookieConsent || CookieConsent.UNSET);
@@ -129,11 +128,17 @@ export default function useForms() {
         hasSubmittedRef.current = true;
 
         let metaEventId: string | undefined = undefined;
+        let fbp: string | undefined = undefined;
+        let fbc: string | undefined = undefined;
         if(showCookiesResponse === CookieConsent.ACCEPTED){
             metaEventId = generateMetaEventId();
+
+            const metaBrowserData = getMetaBrowserData();
+            fbp = metaBrowserData.fbp;
+            fbc = metaBrowserData.fbc;
         }
         try{
-            const { status, message } = await sendForm(formResponse, metaEventId);
+            const { status, message } = await sendForm(formResponse, metaEventId, fbp, fbc);
             if(status === 201){
                 console.info("Form submission successful:", message);
                 if (showCookiesResponse === CookieConsent.ACCEPTED && metaEventId) {

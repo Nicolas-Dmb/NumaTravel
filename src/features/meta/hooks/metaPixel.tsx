@@ -82,3 +82,20 @@ export function trackMetaLead(eventId: string): void {
 
   window.fbq("track", "Lead", {}, { eventID: eventId });
 }
+
+function getCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined;
+
+  const match = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${name}=`));
+
+  return match ? decodeURIComponent(match.split("=")[1]) : undefined;
+}
+
+export function getMetaBrowserData() {
+  return {
+    fbp: getCookie("_fbp"),
+    fbc: getCookie("_fbc"),
+  };
+}
