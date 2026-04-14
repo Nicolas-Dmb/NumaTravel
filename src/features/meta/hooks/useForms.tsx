@@ -150,7 +150,7 @@ export default function useForms() {
                 _errorNavigate();
             }
         }catch(error){
-            console.error("An error occurred while sending the form:", error);
+            console.error("An error occurred while sending the form:", error, "Form response:", formResponse.toJson(undefined,undefined,undefined));
             _errorNavigate();
         }finally{
             hasSubmittedRef.current = false;
