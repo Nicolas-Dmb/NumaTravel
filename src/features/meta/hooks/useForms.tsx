@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef} from 'react';
 import FormResponse, { CookieConsent } from '../model/formResponse';
-import { useNavigate } from 'react-router-dom';
 import sendForm from '../repositories/sendForm';
 import { trackMetaLead, initMetaPixel, generateMetaEventId, getMetaBrowserData } from "./metaPixel";
+import { useNavigate } from 'react-router-dom';
 
 export default function useForms() {
     const [showCookies, setShowCookies] = useState<CookieConsent>(localStorage.getItem("cookieConsent") as CookieConsent || CookieConsent.UNSET);
     const [displayModalCookies, setDisplayModalCookies] = useState(false);
     const [pendingFormResponse, setPendingFormResponse] = useState<FormResponse | null>(null);
+    const [displayContactModal, setDisplayContactModal] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const hasSubmittedRef = useRef(false);
@@ -160,10 +161,8 @@ export default function useForms() {
     }
 
     function _errorNavigate(){
-        setError("Désolé, une erreur est survenue lors de l'envoi du formulaire. Vous allez être redirigé vers une page de contact");
-        setTimeout(() => {
-            navigate("/contact");
-        }, 3000);
+        navigate("/contact");
+        setDisplayContactModal(true);
     }
 
     
@@ -177,5 +176,7 @@ export default function useForms() {
         handleBannerAccept,
         handleBannerRefuse,
         showCookies,
+        displayContactModal,
+        setDisplayContactModal
     }
 }
