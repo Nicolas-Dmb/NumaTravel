@@ -74,7 +74,7 @@ export default function ContactForm({
           <textarea
             name="message"
             rows={3}
-            placeholder="Parlez-moi de votre projet, de vos envies ou posez-moi vos questions !"
+            placeholder="Dites-moi où vous voulez partir, quand, et votre budget approximatif. Je vous répondrai avec une première idée de voyage sur mesure."
             className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition resize-none"
           />
         </div>
