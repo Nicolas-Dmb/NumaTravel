@@ -19,9 +19,9 @@ const CGV = lazy(() => import("./pages/cgv"));
 export default function App() {
   console.error("Test error tracking in App component");
   return (
-      <Router>
-        <AppShell />
-      </Router>
+    <Router>
+      <AppShell />
+    </Router>
   );
 }
 
