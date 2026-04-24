@@ -2,18 +2,16 @@ import ContactForm from '../features/meta/components/forms';
 import { useEffect } from 'react';
 import FourthLayer from '../features/home/components/fourthLayer';
 import ThirdLayer from '../features/home/components/thirdLayer';
-import { CookiesBanner, CookiesPopup } from '../features/meta/components/cookies';
-import useForms from '../features/meta/hooks/useForms';
-import { CookieConsent } from '../features/meta/model/formResponse';
 import SEO from '../components/SEO';
 
 interface MetaContactProps {
     setMetaRoutes: (display: boolean) => void;
+    error: string | null;
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>, phone: string | undefined) => void;
+    isLoading: boolean;
 }
 
-export default function MetaContact({ setMetaRoutes }: MetaContactProps){
-    const { error, handleSubmit, isLoading, displayModalCookies, handlePopupAccept, handlePopupRefuse, handleBannerAccept, handleBannerRefuse, showCookies} = useForms();
-
+export default function MetaContact({ setMetaRoutes, error, handleSubmit, isLoading }: MetaContactProps){
 
     useEffect(() => {
         setMetaRoutes(true);
@@ -29,11 +27,9 @@ export default function MetaContact({ setMetaRoutes }: MetaContactProps){
         />
         <main>
             <div className="min-h-[calc(100vh-4rem)] bg-numa-white pt-4 sm:pt-16">
-                {displayModalCookies && <CookiesPopup handlePopupAccept={handlePopupAccept} handlePopupRefuse={handlePopupRefuse} />}
                 <ContactForm  error={error} handleSubmit={handleSubmit} isLoading={isLoading} />
                 <ThirdLayer />
                 <FourthLayer />
-                {showCookies === CookieConsent.UNSET && !displayModalCookies && <CookiesBanner handleBannerAccept={handleBannerAccept} handleBannerRefuse={handleBannerRefuse} />}
             </div>
         </main>
     </>
