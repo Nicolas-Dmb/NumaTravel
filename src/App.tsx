@@ -18,6 +18,8 @@ const CGV = lazy(() => import("./pages/cgv"));
 
 export default function App() {
 
+  console.error("Test error tracking");
+
   return (
       <Router>
         <AppShell />
