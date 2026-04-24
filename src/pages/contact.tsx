@@ -12,8 +12,7 @@ interface ContactProps {
 
 export default function Contact({ error, handleSubmit, isLoading, setMetaRoutes }: ContactProps){
     useEffect(() => {
-        console.error("Test error tracking");
-        setMetaRoutes(false);
+      setMetaRoutes(false);
     }, [setMetaRoutes]);
 
     return (
