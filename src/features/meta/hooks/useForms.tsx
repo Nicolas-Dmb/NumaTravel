@@ -57,6 +57,7 @@ export default function useForms() {
             setIsLoading(false);
             return;
         }
+        setError(null);
 
         if(showCookies === CookieConsent.UNSET){
             setPendingFormResponse(formResponse);

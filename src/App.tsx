@@ -39,7 +39,7 @@ function AppShell(){
             <Route path="/" element={<Home/>} />
             <Route path="/mentions-legales" element={<LegalNotice isMetaRoutes={isMetaRoutes}/>} />
             <Route path="/cgv" element={<CGV isMetaRoutes={isMetaRoutes}/>} />
-            <Route path="/contact" element={<Contact error={error} handleSubmit={handleSubmit} isLoading={isLoading}/>} />
+            <Route path="/contact" element={<Contact error={error} handleSubmit={handleSubmit} isLoading={isLoading} setMetaRoutes={setMetaRoutes}/>} />
             <Route path="/explorer" element={<Explorer />} />
             <Route path='/go' element={<Home />} />
             <Route path='/meta-contact' element={<MetaContact setMetaRoutes={setMetaRoutes} error={error} handleSubmit={handleSubmit} isLoading={isLoading} />} />

@@ -6,10 +6,12 @@ interface ContactProps {
     error: string | null;
     handleSubmit: (event: React.FormEvent<HTMLFormElement>, phone: string | undefined) => void;
     isLoading: boolean;
+    setMetaRoutes: (value: boolean) => void;
 }
 
-export default function Contact({ error, handleSubmit, isLoading }: ContactProps){
-  
+export default function Contact({ error, handleSubmit, isLoading, setMetaRoutes }: ContactProps){
+    setMetaRoutes(false);
+
     return (
     <>
       <SEO 

@@ -11,16 +11,15 @@ export const ContactModal = ({
   if (!isOpen) return null;
 
   const email = "contact@numatravelplan.com";
-  const phone = "+33 6 12 34 56 78";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
-        <h2 className="text-xl font-semibold text-gray-900">
+      <div className="w-full max-w-md rounded-2xl bg-numa-white p-6 shadow-xl text-numa-black">
+        <h2 className="text-xl font-semibold">
           Une petite erreur est survenue
         </h2>
 
-        <p className="mt-3 text-sm leading-6 text-gray-600">
+        <p className="mt-3 text-sm leading-6">
           Votre demande n’a peut-être pas été transmise correctement.
           Vous pouvez me contacter directement par e-mail ou par téléphone,
           je vous répondrai dès que possible.
@@ -29,16 +28,16 @@ export const ContactModal = ({
         <div className="mt-6 flex flex-col gap-3">
           <a
             href={`mailto:${email}`}
-            className="rounded-xl bg-gray-900 px-4 py-3 text-center text-sm font-medium text-white transition hover:opacity-90"
+            className="rounded-xl bg-numa-black px-4 py-3 text-center text-sm font-medium text-white transition hover:opacity-90"
           >
             Envoyer un e-mail
           </a>
 
           <a
-            href={`tel:${phone.replace(/\s/g, "")}`}
-            className="rounded-xl border border-gray-300 px-4 py-3 text-center text-sm font-medium text-gray-900 transition hover:bg-gray-50"
+            onClick={() => window.open("https://wa.me/330659589733", "_blank")}
+            className="rounded-xl border border-gray-300 px-4 py-3 text-center text-sm font-medium text-numa-black transition hover:bg-numa-black/10"
           >
-            Appeler
+            WhatsApp
           </a>
         </div>
 
