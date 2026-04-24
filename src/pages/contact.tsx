@@ -1,4 +1,5 @@
 import { FaInstagram, FaWhatsapp, FaFacebook, FaEnvelope } from "react-icons/fa";
+import { useEffect } from "react";
 import SEO from "../components/SEO";
 import ContactForm from "../features/meta/components/forms";
 
@@ -10,7 +11,9 @@ interface ContactProps {
 }
 
 export default function Contact({ error, handleSubmit, isLoading, setMetaRoutes }: ContactProps){
-    setMetaRoutes(false);
+    useEffect(() => {
+        setMetaRoutes(false);
+    }, [setMetaRoutes]);
 
     return (
     <>
@@ -45,7 +48,7 @@ function ContactOptions() {
       </div>
       <button
         type="button"
-        onClick={() => window.open("https://wa.me/330659589733", "_blank")}
+        onClick={() => window.open("https://wa.me/33659589733", "_blank")}
         className="flex items-center gap-3 rounded-xl border border-gray-200 p-4 hover:shadow-sm transition"
       >
         <FaWhatsapp className="text-numa-red text-2xl" />
@@ -56,7 +59,7 @@ function ContactOptions() {
       </button>
 
       <a
-        href="mailto:contact@numatravel.com?subject=Demande%20de%20contact%20NumaTravel"
+        href="mailto:numatravelplan@gmail.com?subject=Demande%20de%20contact%20NumaTravel"
         className="flex items-center gap-3 rounded-xl border border-gray-200 p-4 hover:shadow-sm transition"
       >
         <FaEnvelope className="text-numa-red text-2xl" />

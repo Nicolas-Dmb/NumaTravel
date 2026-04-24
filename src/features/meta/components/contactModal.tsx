@@ -10,7 +10,7 @@ export const ContactModal = ({
 }: ContactModalProps) => {
   if (!isOpen) return null;
 
-  const email = "contact@numatravelplan.com";
+  const email = "numatravelplan@gmail.com";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
@@ -34,7 +34,9 @@ export const ContactModal = ({
           </a>
 
           <a
-            onClick={() => window.open("https://wa.me/330659589733", "_blank")}
+            href="https://wa.me/33659589733"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-xl border border-gray-300 px-4 py-3 text-center text-sm font-medium text-numa-black transition hover:bg-numa-black/10"
           >
             WhatsApp

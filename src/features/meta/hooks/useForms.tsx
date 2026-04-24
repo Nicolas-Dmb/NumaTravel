@@ -80,6 +80,7 @@ export default function useForms() {
 
         if (!pendingFormResponse) {
             setError("Désolé, une erreur est survenue lors de l'envoi du formulaire, veuillez réessayer.");
+            setIsLoading(false);
             return;
         }
 
@@ -102,6 +103,7 @@ export default function useForms() {
 
         if (!pendingFormResponse) {
             setError("Désolé, une erreur est survenue lors de l'envoi du formulaire, veuillez réessayer.");
+            setIsLoading(false);
             return;
         }
 
@@ -148,7 +150,7 @@ export default function useForms() {
                 }
                 navigate("/meta-contact/success");
             }else{
-                console.error("Form submission failed with status:", status, "and message:", message);
+                console.error(`Unexpected response status: ${status} ${error} Form response: firstName=${formResponse.firstName}, lastName=${formResponse.lastName}, email=${formResponse.email}, phone=${formResponse.phone}, message=${formResponse.message}`);
                 _errorNavigate();
             }
         }catch(error){
