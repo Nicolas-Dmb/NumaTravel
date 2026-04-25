@@ -2,6 +2,7 @@ import { FaInstagram, FaWhatsapp, FaFacebook, FaEnvelope } from "react-icons/fa"
 import { useEffect } from "react";
 import SEO from "../components/SEO";
 import ContactForm from "../features/meta/components/forms";
+import { trackEvent, TrackingEvent } from "../utils/tracking";
 
 interface ContactProps {
     error: string | null;
@@ -36,6 +37,13 @@ export default function Contact({ error, handleSubmit, isLoading, setMetaRoutes 
 }
 
 function ContactOptions() {
+
+  const handlePhoneClick = () => {
+    trackEvent(TrackingEvent.PHONE_CLICKED, {
+      source: "contact_page",
+    });
+    window.open("https://wa.me/33659589733", "_blank");
+  }
   return (
     <div className="flex flex-col gap-2 md:gap-6 w-full md:w-[40%]">
       <div>
@@ -48,7 +56,7 @@ function ContactOptions() {
       </div>
       <button
         type="button"
-        onClick={() => window.open("https://wa.me/33659589733", "_blank")}
+        onClick={handlePhoneClick}
         className="flex items-center gap-3 rounded-xl border border-gray-200 p-4 hover:shadow-sm transition"
       >
         <FaWhatsapp className="text-numa-red text-2xl" />
@@ -61,6 +69,9 @@ function ContactOptions() {
       <a
         href="mailto:numatravelplan@gmail.com?subject=Demande%20de%20contact%20NumaTravel"
         className="flex items-center gap-3 rounded-xl border border-gray-200 p-4 hover:shadow-sm transition"
+        onClick={() => trackEvent(TrackingEvent.EMAIL_CLICKED, {
+          source: "contact_page",
+        })}   
       >
         <FaEnvelope className="text-numa-red text-2xl" />
         <div>

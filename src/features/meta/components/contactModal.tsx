@@ -1,3 +1,4 @@
+import { trackEvent, TrackingEvent } from "../../../utils/tracking";
 
 type ContactModalProps = {
   isOpen: boolean;
@@ -11,6 +12,20 @@ export const ContactModal = ({
   if (!isOpen) return null;
 
   const email = "numatravelplan@gmail.com";
+
+  const handleEmailClick = () => {
+    trackEvent(TrackingEvent.EMAIL_CLICKED, {
+      source: "contact_modal",
+    });
+    window.location.href = `mailto:${email}`;
+  };
+
+  const handlePhoneClick = () => {
+    trackEvent(TrackingEvent.PHONE_CLICKED, {
+      source: "contact_modal",
+    });
+    window.open("https://wa.me/33659589733", "_blank");
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
@@ -27,14 +42,14 @@ export const ContactModal = ({
 
         <div className="mt-6 flex flex-col gap-3">
           <a
-            href={`mailto:${email}`}
             className="rounded-xl bg-numa-black px-4 py-3 text-center text-sm font-medium text-white transition hover:opacity-90"
+            onClick={handleEmailClick}
           >
             Envoyer un e-mail
           </a>
 
           <a
-            href="https://wa.me/33659589733"
+            onClick={handlePhoneClick}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-gray-300 px-4 py-3 text-center text-sm font-medium text-numa-black transition hover:bg-numa-black/10"

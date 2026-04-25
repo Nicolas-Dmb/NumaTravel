@@ -3,6 +3,7 @@ import FormResponse, { CookieConsent } from '../model/formResponse';
 import sendForm from '../repositories/sendForm';
 import { trackMetaLead, initMetaPixel, generateMetaEventId, getMetaBrowserData } from "./metaPixel";
 import { useNavigate } from 'react-router-dom';
+import { trackEvent, TrackingEvent } from '../../../utils/tracking';
 
 export default function useForms() {
     const [showCookies, setShowCookies] = useState<CookieConsent>(localStorage.getItem("cookieConsent") as CookieConsent || CookieConsent.UNSET);
@@ -88,6 +89,9 @@ export default function useForms() {
 
         localStorage.setItem("cookieConsent", CookieConsent.ACCEPTED);
         setShowCookies(CookieConsent.ACCEPTED);
+        trackEvent(TrackingEvent.COOKIES_ACCEPTED, {
+            source: "popup"
+        });
 
         sendFormData(pendingFormResponse, CookieConsent.ACCEPTED);
     }
@@ -109,6 +113,9 @@ export default function useForms() {
 
         localStorage.setItem("cookieConsent", CookieConsent.REFUSED);
         setShowCookies(CookieConsent.REFUSED);
+        trackEvent(TrackingEvent.COOKIES_REFUSED, {
+            source: "popup"
+        });
 
         sendFormData(pendingFormResponse, CookieConsent.REFUSED);
     }
@@ -117,11 +124,17 @@ export default function useForms() {
         initMetaPixel(import.meta.env.VITE_META_PIXEL_ID);
         localStorage.setItem("cookieConsent", CookieConsent.ACCEPTED);
         setShowCookies(CookieConsent.ACCEPTED);
+        trackEvent(TrackingEvent.COOKIES_ACCEPTED, {
+            source: "banner"
+        });
     }
 
     function handleBannerRefuse(){
         localStorage.setItem("cookieConsent", CookieConsent.REFUSED);
         setShowCookies(CookieConsent.REFUSED);
+        trackEvent(TrackingEvent.COOKIES_REFUSED, {
+            source: "banner"
+        });
     }
 
     async function sendFormData(formResponse: FormResponse, showCookiesResponse: CookieConsent){
@@ -148,14 +161,21 @@ export default function useForms() {
                 if (showCookiesResponse === CookieConsent.ACCEPTED && metaEventId) {
                     trackMetaLead(metaEventId);
                 }
+                trackEvent(TrackingEvent.FORM_SUBMITTED);
                 navigate("/meta-contact/success");
             }else{
                 console.error(`Unexpected response status: ${status} ${error} Form response: firstName=${formResponse.firstName}, lastName=${formResponse.lastName}, email=${formResponse.email}, phone=${formResponse.phone}, message=${formResponse.message}`);
                 _errorNavigate();
+                trackEvent(TrackingEvent.FORM_ERROR, {
+                    email: formResponse.email,
+                });
             }
         }catch(error){
             console.error(`An error occurred while sending the form: ${error} Form response: firstName=${formResponse.firstName}, lastName=${formResponse.lastName}, email=${formResponse.email}, phone=${formResponse.phone}, message=${formResponse.message}`);
             _errorNavigate();
+            trackEvent(TrackingEvent.FORM_ERROR, {
+                email: formResponse.email,
+            });
         }finally{
             hasSubmittedRef.current = false;
             setIsLoading(false);

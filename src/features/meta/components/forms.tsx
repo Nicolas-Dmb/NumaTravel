@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
+import { trackEvent, TrackingEvent } from "../../../utils/tracking";
 
 interface ContactFormProps {
   error: string | null;
@@ -14,6 +15,13 @@ export default function ContactForm({
   isLoading,
 }: ContactFormProps) {
   const [phone, setPhone] = useState<string | undefined>();
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  const hasUserInteracted = () => {
+    if (hasInteracted) return;
+    setHasInteracted(true);
+    trackEvent(TrackingEvent.FORM_STARTED);
+  }
 
   return (
     <div className="flex flex-col justify-center font-poppins text-numa-black px-4 pb-16 w-full max-w-2xl mx-auto">
@@ -29,6 +37,7 @@ export default function ContactForm({
           <div className="flex flex-col">
             <label className="text-sm mb-1">Nom</label>
             <input
+              onChange={() => hasUserInteracted()}
               type="text"
               name="lastName"
               required
@@ -39,6 +48,7 @@ export default function ContactForm({
           <div className="flex flex-col">
             <label className="text-sm mb-1">Prénom</label>
             <input
+              onChange={() => hasUserInteracted()}
               type="text"
               name="firstName"
               required
@@ -51,6 +61,7 @@ export default function ContactForm({
           <div className="flex flex-col">
             <label className="text-sm mb-1">Email</label>
             <input
+              onChange={() => hasUserInteracted()}
               type="email"
               name="email"
               required
@@ -65,7 +76,10 @@ export default function ContactForm({
                 international
                 defaultCountry="FR"
                 value={phone}
-                onChange={setPhone}
+                onChange={(value) => {
+                  setPhone(value);
+                  hasUserInteracted();
+                }}
                 className="phone-input"
               />
             </div>
@@ -75,6 +89,7 @@ export default function ContactForm({
         <div className="flex flex-col">
           <label className="text-sm mb-1">Message</label>
           <textarea
+            onChange={() => hasUserInteracted()}
             name="message"
             rows={3}
             placeholder="Dites-moi où vous voulez partir, quand, et votre budget approximatif. Je vous répondrai avec une première idée de voyage sur mesure."
