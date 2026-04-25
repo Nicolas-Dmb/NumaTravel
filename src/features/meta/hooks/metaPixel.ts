@@ -83,6 +83,24 @@ export function trackMetaLead(eventId: string): void {
   window.fbq("track", "Lead", {}, { eventID: eventId });
 }
 
+export const ContactTypes = {
+  PHONE: "phone",
+  EMAIL: "email",
+} as const;
+
+export type ContactType = typeof ContactTypes[keyof typeof ContactTypes];
+
+export function trackMetaContact(type: ContactType): void {
+  if (!window.fbq || !isMetaInitialized) {
+    console.warn("Meta Pixel not initialized, cannot track Contact");
+    return;
+  }
+
+  window.fbq("track", "Contact", {
+    content_name: type,
+  });
+}
+
 function getCookie(name: string): string | undefined {
   if (typeof document === "undefined") return undefined;
 
@@ -99,3 +117,5 @@ export function getMetaBrowserData() {
     fbc: getCookie("_fbc"),
   };
 }
+
+

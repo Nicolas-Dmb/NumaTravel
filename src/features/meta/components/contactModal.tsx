@@ -1,4 +1,4 @@
-import { trackEvent, TrackingEvent } from "../../../utils/tracking";
+import useContact, {ContactLocation} from "../hooks/useContact";
 
 type ContactModalProps = {
   isOpen: boolean;
@@ -9,24 +9,11 @@ export const ContactModal = ({
   isOpen,
   onClose,
 }: ContactModalProps) => {
+
+  const { handlePhoneClick, handleEmailClick } = useContact();
+
   if (!isOpen) return null;
-
-  const email = "numatravelplan@gmail.com";
-
-  const handleEmailClick = () => {
-    trackEvent(TrackingEvent.EMAIL_CLICKED, {
-      source: "contact_modal",
-    });
-    window.location.href = `mailto:${email}`;
-  };
-
-  const handlePhoneClick = () => {
-    trackEvent(TrackingEvent.PHONE_CLICKED, {
-      source: "contact_modal",
-    });
-    window.open("https://wa.me/33659589733", "_blank");
-  }
-
+  
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
       <div className="w-full max-w-md rounded-2xl bg-numa-white p-6 shadow-xl text-numa-black">
@@ -43,13 +30,13 @@ export const ContactModal = ({
         <div className="mt-6 flex flex-col gap-3">
           <a
             className="rounded-xl bg-numa-black px-4 py-3 text-center text-sm font-medium text-white transition hover:opacity-90"
-            onClick={handleEmailClick}
+            onClick={() => handleEmailClick(ContactLocation.CONTACT_MODAL)}
           >
             Envoyer un e-mail
           </a>
 
           <a
-            onClick={handlePhoneClick}
+            onClick={() => handlePhoneClick(ContactLocation.CONTACT_MODAL)}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-xl border border-gray-300 px-4 py-3 text-center text-sm font-medium text-numa-black transition hover:bg-numa-black/10"
