@@ -14,5 +14,7 @@ export default async function sendForm(formResponse: FormResponse, metaEventId: 
     // }
     // const data = await response.json();
     // return { status: response.status, message: data.message };  
-    throw new Error(" TMP sendForm is currently disabled for testing purposes");
+
+
+    throw new Error(" TMP sendForm is currently disabled for testing purposes", { cause: { formResponse, metaEventId, fbp, fbc } });
 }
