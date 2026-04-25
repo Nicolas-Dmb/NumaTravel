@@ -19,7 +19,7 @@ export const trackEvent = (
   const params = new URLSearchParams(window.location.search);
 
   const commonData = {
-    page: window.location.pathname,
+    page: window.location.pathname + window.location.hash,
     source: params.get("utm_source") || "direct",
     medium: params.get("utm_medium") || "none",
     campaign: params.get("utm_campaign") || "none",
