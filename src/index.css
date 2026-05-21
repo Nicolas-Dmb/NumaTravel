@@ -6,6 +6,13 @@ html {
   scroll-behavior: smooth;
 }
 
+video::-webkit-media-controls,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 @font-face {
   font-family: "Cormorant";
   src: url("/fonts/cormorant.woff2") format("woff2");
