@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import logo from "../assets/logo.svg";
 import video from "/video-desktop.mp4";
 import hero from "/hero.webp";
@@ -5,11 +6,29 @@ import { useNavigate } from "react-router-dom";
 
 export default function FirstLayer() {
     const navigate = useNavigate();
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [videoPlaying, setVideoPlaying] = useState(false);
 
-  
+    useEffect(() => {
+        const el = videoRef.current;
+        if (!el) return;
+        const p = el.play();
+        if (p !== undefined) {
+            p.then(() => setVideoPlaying(true)).catch(() => setVideoPlaying(false));
+        }
+    }, []);
+
+
   return (
     <section className="relative h-screen overflow-hidden">
+      <img
+        src={hero}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
       <video
+        ref={videoRef}
         autoPlay
         muted
         playsInline
@@ -17,17 +36,12 @@ export default function FirstLayer() {
         preload="metadata"
         poster={hero}
         disablePictureInPicture
-        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden="true"
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${
+          videoPlaying ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
       >
         <source src={video} type="video/mp4" />
-
-        <track
-          kind="captions"
-          src="/captions/hero-fr.vtt"
-          srcLang="fr"
-          label="Français"
-          default
-        />
       </video>
 
       <div className="absolute top-0 right-0 p-4 z-20">
