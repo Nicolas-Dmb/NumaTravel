@@ -6,6 +6,7 @@ import MetaContact from "./pages/metaForms";
 import ScrollToAnchor from './utils/ScrollToAnchor';
 import Thanks from "./pages/Thanks";
 import useForms from "./features/meta/hooks/useForms";
+import useCookies from "./features/meta/hooks/useCookies";
 import { CookiesBanner, CookiesPopup } from "./features/meta/components/cookies";
 import { CookieConsent } from "./features/meta/model/formResponse";
 import { ContactModal } from "./features/meta/components/contactModal";
@@ -26,7 +27,8 @@ export default function App() {
 
 function AppShell(){
   const [isMetaRoutes, setMetaRoutes] = useState(false); 
-  const { error, handleSubmit, isLoading, displayModalCookies, handlePopupAccept, handlePopupRefuse, handleBannerAccept, handleBannerRefuse, showCookies, displayContactModal, setDisplayContactModal } = useForms();
+  const { showCookies, displayModalCookies, handlePopupAccept, handlePopupRefuse, handleBannerAccept, handleBannerRefuse, requestConsent } = useCookies();
+  const { error, handleSubmit, isLoading, displayContactModal, setDisplayContactModal } = useForms({ showCookies, requestConsent });
 
   return (
     <div id="global-wrapper" className='h-screen w-screen select-none' >
