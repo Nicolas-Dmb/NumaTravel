@@ -5,6 +5,7 @@ import more from "/more.svg";
 import close from "/close.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { scrollToHash } from "../utils/scrollToHash";
 
 
 const buttonStyle =
@@ -66,8 +67,8 @@ function LaptopHeader({ onOpenServices, onForceClose }: LaptopHeaderProps) {
     <div
       className="text-numa-black flex items-center justify-around h-16 font-cormorant font-bold"
     >
-      <Link onMouseEnter={onForceClose} className={buttonStyle} to="/#first-layer">ACCUEIL</Link>
-      <Link onMouseEnter={onForceClose} className={buttonStyle} to="/#fourth-layer">QUI SUIS-JE ?</Link>
+      <Link onMouseEnter={onForceClose} onClick={() => scrollToHash("#first-layer")} className={buttonStyle} to="/#first-layer">ACCUEIL</Link>
+      <Link onMouseEnter={onForceClose} onClick={() => scrollToHash("#fourth-layer")} className={buttonStyle} to="/#fourth-layer">QUI SUIS-JE ?</Link>
 
       <div onMouseEnter={onOpenServices}>
         <a className={buttonStyle}>MES SERVICES</a>
@@ -90,7 +91,7 @@ function TouchpadHeader({ setSeeMore }: MdHeaderProps) {
   return <div
       className="text-numa-black flex items-center justify-between h-16 gap-8 items-center px-4"
     >
-      <Link className="text-[22px] font-cormorant font-semibold" to="/#first-layer">NUMA TRAVEL</Link>
+      <Link onClick={() => scrollToHash("#first-layer")} className="text-[22px] font-cormorant font-semibold" to="/#first-layer">NUMA TRAVEL</Link>
       <div className="flex gap-10 items-center">
         <Link to="/explorer" className="text-[22px] font-cormorant font-semibold">EXPLORER</Link>
         <Link to="/contact" className="text-[22px] text-numa-red font-cormorant font-semibold">
@@ -106,7 +107,7 @@ function MobileHeader({ setSeeMore }: MdHeaderProps) {
     <div
       className="text-numa-black flex items-center justify-between h-16 gap-8 items-center"
     >
-      <Link className="text-[14px] font-cormorant font-semibold" to="/#first-layer">NUMA TRAVEL</Link>
+      <Link onClick={() => scrollToHash("#first-layer")} className="text-[14px] font-cormorant font-semibold" to="/#first-layer">NUMA TRAVEL</Link>
       <div className="flex gap-4 items-center">
         <Link to="/explorer" className="text-[14px] font-cormorant font-semibold">EXPLORER</Link>
         <Link to="/contact" className="text-[14px] font-cormorant font-semibold text-numa-red">
@@ -133,10 +134,10 @@ function MoreSections({ isTouchpad, setSeeMore, seeMore, scrollDirection }: More
     <div className={`fixed top-0 left-0 w-full bg-[#ebe6e277] z-50 backdrop-blur-sm shadow-lg pb-8 px-8 ${seeMore ? "block" : "hidden"} transition-transform duration-300 ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}`}>
       <img src={close} alt="Close options" className={`cursor-pointer float-right mt-4 ${isTouchpad ? "w-5 h-5" : "w-5 h-5"}`} onClick={() => setSeeMore(false)} />
       <div className="flex flex-col gap-4 pt-16 items-center" onClick={()=> setSeeMore(false)}>
-        <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#services-voyages">QUI SUIS-JE ?</Link>
-        <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">MES SERVICES VOYAGES</Link>
-        <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">TRAVEL PLANNER</Link>
-        <Link className={isTouchpad ? touchPadStyle : mobileStyle} to="/#accompagnement">ACCOMPAGNEMENT</Link>
+        <Link onClick={() => scrollToHash("#services-voyages")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#services-voyages">QUI SUIS-JE ?</Link>
+        <Link onClick={() => scrollToHash("#travel-planner")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">MES SERVICES VOYAGES</Link>
+        <Link onClick={() => scrollToHash("#travel-planner")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">TRAVEL PLANNER</Link>
+        <Link onClick={() => scrollToHash("#accompagnement")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#accompagnement">ACCOMPAGNEMENT</Link>
       </div>
     </div>
   )
@@ -169,9 +170,9 @@ function LaptopServices({ displayServices, close, scrollDirection }: LaptopServi
           ${displayServices ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-1 pointer-events-none"}
         `}
       >
-        <Link className={subButtonStyle + " block px-5 py-3"} to="/#services-voyages">MES SERVICES VOYAGES</Link>
-        <Link className={subButtonStyle + " block px-5 py-3"} to="/#travel-planner">TRAVEL PLANNER</Link>
-        <Link className={subButtonStyle + " block px-5 py-3"} to="/#accompagnement">ACCOMPAGNEMENT</Link>
+        <Link onClick={() => scrollToHash("#services-voyages")} className={subButtonStyle + " block px-5 py-3"} to="/#services-voyages">MES SERVICES VOYAGES</Link>
+        <Link onClick={() => scrollToHash("#travel-planner")} className={subButtonStyle + " block px-5 py-3"} to="/#travel-planner">TRAVEL PLANNER</Link>
+        <Link onClick={() => scrollToHash("#accompagnement")} className={subButtonStyle + " block px-5 py-3"} to="/#accompagnement">ACCOMPAGNEMENT</Link>
       </div>
     </div>
   )

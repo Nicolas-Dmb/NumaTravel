@@ -3,7 +3,7 @@ import Footer from './components/footer';
 import { lazy, Suspense, useState } from "react";
 import Header from './components/header';
 import MetaContact from "./pages/metaForms";
-import ScrollToAnchor from './utils/scrollToHash';
+import ScrollToAnchor from './utils/ScrollToAnchor';
 import Thanks from "./pages/Thanks";
 import useForms from "./features/meta/hooks/useForms";
 import { CookiesBanner, CookiesPopup } from "./features/meta/components/cookies";
