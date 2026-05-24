@@ -4,15 +4,17 @@ import FourthLayer from '../features/home/components/fourthLayer';
 import ThirdLayer from '../features/home/components/thirdLayer';
 import SEO from '../components/SEO';
 import MetaHeader from '../components/meta_header';
+import type { FistPageResponse } from '../features/meta/model/formResponse';
 
 interface MetaContactProps {
     setMetaRoutes: (display: boolean) => void;
     error: string | null;
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>, phone: string | undefined) => void;
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>, phone: string | undefined, firstPageData: FistPageResponse) => void;
     isLoading: boolean;
+    validateFistPageFormData: (formData: FormData) => FistPageResponse | null;
 }
 
-export default function MetaContact({ setMetaRoutes, error, handleSubmit, isLoading }: MetaContactProps){
+export default function MetaContact({ setMetaRoutes, error, handleSubmit, isLoading, validateFistPageFormData }: MetaContactProps){
 
     useEffect(() => {
         setMetaRoutes(true);
@@ -38,7 +40,7 @@ export default function MetaContact({ setMetaRoutes, error, handleSubmit, isLoad
                 <ThirdLayer />
                 <div className="mx-auto my-10 md:my-[7.5rem]">
                     <section id="meta-form">
-                        <ContactForm error={error} handleSubmit={handleSubmit} isLoading={isLoading} />
+                        <ContactForm error={error} handleSubmit={handleSubmit} isLoading={isLoading} validateFistPageFormData={validateFistPageFormData} />
                     </section>
                 </div>
             </div>

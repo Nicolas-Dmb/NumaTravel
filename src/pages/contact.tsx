@@ -3,15 +3,17 @@ import { useEffect } from "react";
 import SEO from "../components/SEO";
 import ContactForm from "../features/meta/components/forms";
 import useContact, { ContactLocation } from "../features/meta/hooks/useContact";
+import type { FistPageResponse } from "../features/meta/model/formResponse";
 
 interface ContactProps {
     error: string | null;
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>, phone: string | undefined) => void;
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>, phone: string | undefined, firstPageData: FistPageResponse) => void;
     isLoading: boolean;
     setMetaRoutes: (value: boolean) => void;
+    validateFistPageFormData: (formData: FormData) => FistPageResponse | null;
 }
 
-export default function Contact({ error, handleSubmit, isLoading, setMetaRoutes }: ContactProps){
+export default function Contact({ error, handleSubmit, isLoading, setMetaRoutes, validateFistPageFormData }: ContactProps){
     useEffect(() => {
       setMetaRoutes(false);
     }, [setMetaRoutes]);
@@ -28,7 +30,7 @@ export default function Contact({ error, handleSubmit, isLoading, setMetaRoutes 
             <h1 className="text-[40px] lg:text-[70px] font-bold font-cormorant text-numa-black">Me contacter</h1>
             <div className="flex flex-col gap-4 mt-8 mx-4 md:flex-row md:gap-8 md:mx-16 lg:mx-32 md:justify-between">
                 <ContactOptions />
-                <ContactForm error={error} handleSubmit={handleSubmit} isLoading={isLoading} />
+                <ContactForm error={error} handleSubmit={handleSubmit} isLoading={isLoading} validateFistPageFormData={validateFistPageFormData} />
             </div>
         </div>
       </main>

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import FormResponse, { CookieConsent } from '../model/formResponse';
+import FormResponse, { CookieConsent, FistPageResponse } from '../model/formResponse';
 import sendForm from '../repositories/sendForm';
 import { trackMetaLead, generateMetaEventId, getMetaBrowserData } from "./metaPixel";
 import { useNavigate } from 'react-router-dom';
@@ -17,9 +17,9 @@ export default function useForms({ showCookies, requestConsent }: UseFormsArgs) 
     const hasSubmittedRef = useRef(false);
     const navigate = useNavigate();
 
-    function _validateFormData(formData: FormData): FormResponse | null {
+    function validateFistPageFormData(formData: FormData): FistPageResponse | null {
         try {
-            return FormResponse.fromFormData(formData);
+            return FistPageResponse.fromFormData(formData);
         } catch (error) {
             if (error instanceof Error) {
                 setError(error.message);
@@ -32,8 +32,22 @@ export default function useForms({ showCookies, requestConsent }: UseFormsArgs) 
         }
     }
 
+    function _validateFormData(formData: FormData, firstPageData: FistPageResponse): FormResponse | null {
+        try {
+            return FormResponse.fromFormData(formData, firstPageData);
+        } catch (error) {
+            if (error instanceof Error) {
+                setError(error.message);
+                console.warn("Form submission failed:", error, "Form data:", Object.fromEntries(formData.entries()));
+            } else {
+                console.error("An unknown error occurred during form submission.");
+                _errorNavigate();
+            }
+            return null;
+        }
+    }
 
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>, phone: string | undefined) {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>, phone: string | undefined, firstPageData: FistPageResponse) {
         event.preventDefault();
 
         if (hasSubmittedRef.current) {
@@ -48,7 +62,7 @@ export default function useForms({ showCookies, requestConsent }: UseFormsArgs) 
         if (phone) {
             formData.set("phone", phone);
         }
-        const formResponse = _validateFormData(formData);
+        const formResponse = _validateFormData(formData, firstPageData);
         if(formResponse == null){
             setIsLoading(false);
             return;
@@ -124,5 +138,6 @@ export default function useForms({ showCookies, requestConsent }: UseFormsArgs) 
         isLoading,
         displayContactModal,
         setDisplayContactModal,
+        validateFistPageFormData,
     };
 }

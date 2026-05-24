@@ -9,35 +9,30 @@ export const CookieConsent = {
 export type CookieConsent =
   typeof CookieConsent[keyof typeof CookieConsent];
 
-
-export default class FormResponse {
+export class FistPageResponse {
     firstName: string;
     lastName: string;
-    email: string;
+    email: string
     phone?: string;
-    message: string;
 
-    constructor( firstName: string, lastName: string, email: string, message: string, phone?: string) {
+    constructor(firstName: string, lastName: string, email: string, phone?: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
-        this.message = message;
     }
 
-    static fromFormData(formData: FormData): FormResponse {
+    static fromFormData(formData: FormData): FistPageResponse {
         const data = Object.fromEntries(formData.entries());
 
         const firstName = String(data.firstName ?? "").trim();
         const lastName = String(data.lastName ?? "").trim();
         const email = String(data.email ?? "").trim();
-        const message = String(data.message ?? "").trim();
         const phone = String(data.phone ?? "").trim();
 
         if (!lastName) throw new Error("Le nom est requis");
         if (!firstName) throw new Error("Le prénom est requis");
         if (!email) throw new Error("L'email est requis");
-        if (!message) throw new Error("Le message est requis");
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
@@ -50,12 +45,59 @@ export default class FormResponse {
 
         const normalizedPhone = phone || undefined;
 
-        return new FormResponse(
+        return new FistPageResponse(
             firstName,
             lastName,
             email,
-            message,
             normalizedPhone
+        );
+    }
+}
+
+
+export default class FormResponse {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone?: string;
+    priceRange?: string;
+    costRange?: string;
+    destination?: string;
+    message: string;
+
+    constructor( firstName: string, lastName: string, email: string, message: string, phone?: string, priceRange?: string, costRange?: string, destination?: string) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.priceRange = priceRange;
+        this.costRange = costRange;
+        this.destination = destination;
+        this.message = message;
+    }
+
+    static fromFormData(formData: FormData, firstPageData: FistPageResponse): FormResponse {
+        const data = Object.fromEntries(formData.entries());
+
+        const message = String(data.message ?? "").trim();
+        const priceRange = String(data.priceRange ?? "").trim();
+        const costRange = String(data.costRange ?? "").trim();
+        const destination = String(data.destination ?? "").trim();
+
+        if (!priceRange) throw new Error("La fourchette de prix est requise");
+        if (!costRange) throw new Error("La fourchette de coût est requise");
+        if (!destination) throw new Error("La destination est requise");
+        if (!message) throw new Error("Le message est requis");
+
+        return new FormResponse(
+            firstPageData.firstName,
+            firstPageData.lastName,
+            firstPageData.email,
+            message,
+            firstPageData.phone,
+            priceRange,
+            costRange,
+            destination
         );
   }
 
@@ -66,9 +108,12 @@ export default class FormResponse {
             email: this.email,
             phone: this.phone,
             message: this.message,
+            priceRange: this.priceRange,
             metaEventId: metaEventId,
+            costRange: this.costRange,
+            destination: this.destination,
             fbp: fbp,
-            fbc: fbc
+            fbc: fbc,
         }
     }
     

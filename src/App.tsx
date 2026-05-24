@@ -28,7 +28,7 @@ export default function App() {
 function AppShell(){
   const [isMetaRoutes, setMetaRoutes] = useState(false); 
   const { showCookies, displayModalCookies, handlePopupAccept, handlePopupRefuse, handleBannerAccept, handleBannerRefuse, requestConsent } = useCookies();
-  const { error, handleSubmit, isLoading, displayContactModal, setDisplayContactModal } = useForms({ showCookies, requestConsent });
+  const { error, handleSubmit, isLoading, displayContactModal, setDisplayContactModal, validateFistPageFormData } = useForms({ showCookies, requestConsent });
 
   return (
     <div id="global-wrapper" className='h-screen w-screen select-none' >
@@ -40,10 +40,10 @@ function AppShell(){
             <Route path="/" element={<Home/>} />
             <Route path="/mentions-legales" element={<LegalNotice isMetaRoutes={isMetaRoutes}/>} />
             <Route path="/cgv" element={<CGV isMetaRoutes={isMetaRoutes}/>} />
-            <Route path="/contact" element={<Contact error={error} handleSubmit={handleSubmit} isLoading={isLoading} setMetaRoutes={setMetaRoutes}/>} />
+            <Route path="/contact" element={<Contact error={error} handleSubmit={handleSubmit} isLoading={isLoading} setMetaRoutes={setMetaRoutes} validateFistPageFormData={validateFistPageFormData}/>} />
             <Route path="/explorer" element={<Explorer />} />
             <Route path='/go' element={<Home />} />
-            <Route path='/meta-contact' element={<MetaContact setMetaRoutes={setMetaRoutes} error={error} handleSubmit={handleSubmit} isLoading={isLoading} />} />
+            <Route path='/meta-contact' element={<MetaContact setMetaRoutes={setMetaRoutes} error={error} handleSubmit={handleSubmit} isLoading={isLoading} validateFistPageFormData={validateFistPageFormData} />} />
             <Route path='/meta-contact/success' element={<Thanks setMetaRoutes={setMetaRoutes}/>} />
           </Routes>
           </Suspense>
