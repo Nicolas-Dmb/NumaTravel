@@ -20,7 +20,7 @@ export default function Home() {
         <section id='first-layer'><FirstLayer /></section>
         <SecondLayer />
         <section id="services-voyages"><ThirdLayer /></section>
-        <section id="fourth-layer"><FourthLayer /></section>
+        <section id="fourth-layer"><FourthLayer isWhiteBackground={false} /></section>
         <section id="panoramic-layer"><PanoramicLayer /></section>
         <section id='travel-planner'><FifthLayer /></section>
 

@@ -1,8 +1,13 @@
 import alois from '../assets/alois.webp'
 
-export default function FourthLayer() {
+interface FourthLayerProps {
+  isWhiteBackground: boolean;
+}
+
+export default function FourthLayer({ isWhiteBackground }: FourthLayerProps) {
   return (
-    <section className="bg-numa-red text-numa-white xl:min-h-[95vh]">
+    <section className={isWhiteBackground ? "bg-numa-white text-numa-black xl:min-h-[95vh]" : "bg-numa-red text-numa-white xl:min-h-[95vh]"}>
+
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-10 xl:flex-row xl:items-stretch xl:gap-16 xl:min-h-[95vh]">
 
@@ -25,7 +30,7 @@ export default function FourthLayer() {
             </div>
 
             <div className="mt-10 w-fit bg-numa-black px-6 py-2 mx-auto ml-[30vw] md:ml-[40vw] xl:ml-0 xl:mx-0 xl:self-end">
-              <h1 className="font-cormorant text-[22px] font-bold sm:text-[30px] lg:text-[43px]">
+              <h1 className={isWhiteBackground ?"font-cormorant text-[22px] font-bold sm:text-[30px] lg:text-[43px] text-numa-white" : "font-cormorant text-[22px] font-bold sm:text-[30px] lg:text-[43px]"}>
                 Moi, c’est Aloïs !
               </h1>
             </div>

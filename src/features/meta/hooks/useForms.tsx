@@ -1,29 +1,27 @@
-import React, { useState, useEffect, useRef} from 'react';
-import FormResponse, { CookieConsent } from '../model/formResponse';
+import React, { useState, useRef } from 'react';
+import FormResponse, { CookieConsent, FistPageResponse } from '../model/formResponse';
 import sendForm from '../repositories/sendForm';
-import { trackMetaLead, initMetaPixel, generateMetaEventId, getMetaBrowserData } from "./metaPixel";
+import { trackMetaLead, generateMetaEventId, getMetaBrowserData } from "./metaPixel";
 import { useNavigate } from 'react-router-dom';
 import { trackEvent, TrackingEvent } from '../../../utils/tracking';
 
-export default function useForms() {
-    const [showCookies, setShowCookies] = useState<CookieConsent>(localStorage.getItem("cookieConsent") as CookieConsent || CookieConsent.UNSET);
-    const [displayModalCookies, setDisplayModalCookies] = useState(false);
-    const [pendingFormResponse, setPendingFormResponse] = useState<FormResponse | null>(null);
+type UseFormsArgs = {
+    showCookies: CookieConsent;
+    requestConsent: (callback: (consent: CookieConsent) => void) => void;
+};
+
+export default function useForms({ showCookies, requestConsent }: UseFormsArgs) {
     const [displayContactModal, setDisplayContactModal] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const hasSubmittedRef = useRef(false);
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        if(showCookies === CookieConsent.ACCEPTED){
-            initMetaPixel(import.meta.env.VITE_META_PIXEL_ID);
-        }
-    }, [showCookies]);
-
-    function _validateFormData(formData: FormData): FormResponse | null {
+    function validateFistPageFormData(formData: FormData): FistPageResponse | null {
         try {
-            return FormResponse.fromFormData(formData);;
+            const result = FistPageResponse.fromFormData(formData);
+            setError(null);
+            return result;
         } catch (error) {
             if (error instanceof Error) {
                 setError(error.message);
@@ -36,8 +34,22 @@ export default function useForms() {
         }
     }
 
+    function _validateFormData(formData: FormData, firstPageData: FistPageResponse): FormResponse | null {
+        try {
+            return FormResponse.fromFormData(formData, firstPageData);
+        } catch (error) {
+            if (error instanceof Error) {
+                setError(error.message);
+                console.warn("Form submission failed:", error, "Form data:", Object.fromEntries(formData.entries()));
+            } else {
+                console.error("An unknown error occurred during form submission.");
+                _errorNavigate();
+            }
+            return null;
+        }
+    }
 
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>, phone: string | undefined) {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>, phone: string | undefined, firstPageData: FistPageResponse) {
         event.preventDefault();
 
         if (hasSubmittedRef.current) {
@@ -47,13 +59,12 @@ export default function useForms() {
 
         setIsLoading(true);
 
-        
         console.info("Form submitted, validating data...");
         const formData = new FormData(event.currentTarget);
         if (phone) {
             formData.set("phone", phone);
         }
-        const formResponse = _validateFormData(formData);
+        const formResponse = _validateFormData(formData, firstPageData);
         if(formResponse == null){
             setIsLoading(false);
             return;
@@ -61,80 +72,18 @@ export default function useForms() {
         setError(null);
 
         if(showCookies === CookieConsent.UNSET){
-            setPendingFormResponse(formResponse);
-            setDisplayModalCookies(true);
             setIsLoading(false);
+            trackEvent(TrackingEvent.FORM_PENDING_CONSENT, {
+                email: formResponse.email,
+            });
+            requestConsent((consent) => {
+                setIsLoading(true);
+                sendFormData(formResponse, consent);
+            });
             return;
         }
 
         sendFormData(formResponse, showCookies);
-
-    } 
-
-    function handlePopupAccept(){
-        if (hasSubmittedRef.current) {
-            console.warn("Form has already been submitted, ignoring duplicate submission.");
-            return;
-        }
-        setIsLoading(true);
-        setDisplayModalCookies(false);
-
-        if (!pendingFormResponse) {
-            setError("Désolé, une erreur est survenue lors de l'envoi du formulaire, veuillez réessayer.");
-            setIsLoading(false);
-            return;
-        }
-
-        initMetaPixel(import.meta.env.VITE_META_PIXEL_ID);
-
-        localStorage.setItem("cookieConsent", CookieConsent.ACCEPTED);
-        setShowCookies(CookieConsent.ACCEPTED);
-        trackEvent(TrackingEvent.COOKIES_ACCEPTED, {
-            source: "popup"
-        });
-
-        sendFormData(pendingFormResponse, CookieConsent.ACCEPTED);
-    }
-
-    function handlePopupRefuse(){
-        if (hasSubmittedRef.current) {
-            console.warn("Form has already been submitted, ignoring duplicate submission.");
-            return;
-        }
-        setIsLoading(true);
-        setDisplayModalCookies(false);
-
-
-        if (!pendingFormResponse) {
-            setError("Désolé, une erreur est survenue lors de l'envoi du formulaire, veuillez réessayer.");
-            setIsLoading(false);
-            return;
-        }
-
-        localStorage.setItem("cookieConsent", CookieConsent.REFUSED);
-        setShowCookies(CookieConsent.REFUSED);
-        trackEvent(TrackingEvent.COOKIES_REFUSED, {
-            source: "popup"
-        });
-
-        sendFormData(pendingFormResponse, CookieConsent.REFUSED);
-    }
-
-    function handleBannerAccept(){
-        initMetaPixel(import.meta.env.VITE_META_PIXEL_ID);
-        localStorage.setItem("cookieConsent", CookieConsent.ACCEPTED);
-        setShowCookies(CookieConsent.ACCEPTED);
-        trackEvent(TrackingEvent.COOKIES_ACCEPTED, {
-            source: "banner"
-        });
-    }
-
-    function handleBannerRefuse(){
-        localStorage.setItem("cookieConsent", CookieConsent.REFUSED);
-        setShowCookies(CookieConsent.REFUSED);
-        trackEvent(TrackingEvent.COOKIES_REFUSED, {
-            source: "banner"
-        });
     }
 
     async function sendFormData(formResponse: FormResponse, showCookiesResponse: CookieConsent){
@@ -179,7 +128,6 @@ export default function useForms() {
         }finally{
             hasSubmittedRef.current = false;
             setIsLoading(false);
-            setPendingFormResponse(null);
         }
     }
 
@@ -188,18 +136,13 @@ export default function useForms() {
         setDisplayContactModal(true);
     }
 
-    
+
     return {
-        error, 
+        error,
         handleSubmit,
         isLoading,
-        displayModalCookies,
-        handlePopupAccept,
-        handlePopupRefuse,
-        handleBannerAccept,
-        handleBannerRefuse,
-        showCookies,
         displayContactModal,
-        setDisplayContactModal
-    }
+        setDisplayContactModal,
+        validateFistPageFormData,
+    };
 }
