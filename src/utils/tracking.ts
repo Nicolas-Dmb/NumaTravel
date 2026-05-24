@@ -3,6 +3,7 @@ export const TrackingEvent = {
   FORM_STARTED: "form_started",
   FORM_SUBMITTED: "form_submitted",
   FORM_ERROR: "form_error",
+  FORM_PENDING_CONSENT: "form_pending_consent",
   PHONE_CLICKED: "phone_clicked",
   EMAIL_CLICKED: "email_clicked",
   COOKIES_ACCEPTED: "cookies_accepted",
@@ -14,7 +15,7 @@ export type TrackingEvent =
 
 export const trackEvent = (
   eventName: TrackingEvent,
-  data: Record<string, any> = {}
+  data: Record<string, unknown> = {}
 ) => {
   const params = new URLSearchParams(window.location.search);
 
