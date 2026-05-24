@@ -61,17 +61,17 @@ export default class FormResponse {
     email: string;
     phone?: string;
     priceRange?: string;
-    costRange?: string;
+    departureRange?: string;
     destination?: string;
     message: string;
 
-    constructor( firstName: string, lastName: string, email: string, message: string, phone?: string, priceRange?: string, costRange?: string, destination?: string) {
+    constructor( firstName: string, lastName: string, email: string, message: string, phone?: string, priceRange?: string, departureRange?: string, destination?: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.priceRange = priceRange;
-        this.costRange = costRange;
+        this.departureRange = departureRange;
         this.destination = destination;
         this.message = message;
     }
@@ -81,11 +81,11 @@ export default class FormResponse {
 
         const message = String(data.message ?? "").trim();
         const priceRange = String(data.priceRange ?? "").trim();
-        const costRange = String(data.costRange ?? "").trim();
+        const departureRange = String(data.departureRange ?? "").trim();
         const destination = String(data.destination ?? "").trim();
 
         if (!priceRange) throw new Error("La fourchette de prix est requise");
-        if (!costRange) throw new Error("La fourchette de coût est requise");
+        if (!departureRange) throw new Error("La période de départ est requise");
         if (!destination) throw new Error("La destination est requise");
         if (!message) throw new Error("Le message est requis");
 
@@ -96,7 +96,7 @@ export default class FormResponse {
             message,
             firstPageData.phone,
             priceRange,
-            costRange,
+            departureRange,
             destination
         );
   }
@@ -110,7 +110,7 @@ export default class FormResponse {
             message: this.message,
             priceRange: this.priceRange,
             metaEventId: metaEventId,
-            costRange: this.costRange,
+            departureRange: this.departureRange,
             destination: this.destination,
             fbp: fbp,
             fbc: fbc,

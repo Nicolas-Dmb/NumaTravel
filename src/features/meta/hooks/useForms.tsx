@@ -19,7 +19,9 @@ export default function useForms({ showCookies, requestConsent }: UseFormsArgs) 
 
     function validateFistPageFormData(formData: FormData): FistPageResponse | null {
         try {
-            return FistPageResponse.fromFormData(formData);
+            const result = FistPageResponse.fromFormData(formData);
+            setError(null);
+            return result;
         } catch (error) {
             if (error instanceof Error) {
                 setError(error.message);
