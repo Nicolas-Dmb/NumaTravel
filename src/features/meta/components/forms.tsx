@@ -240,7 +240,6 @@ function SecondPage({ hasUserInteracted }: { hasUserInteracted: () => void }) {
           onChange={() => hasUserInteracted()}
           name="message"
           rows={3}
-          required
           placeholder="Dites-moi en plus sur votre projet, vos envies ou vos questions."
           className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition resize-none"
         />

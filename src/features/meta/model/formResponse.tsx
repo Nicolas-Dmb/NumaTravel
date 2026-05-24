@@ -60,12 +60,12 @@ export default class FormResponse {
     lastName: string;
     email: string;
     phone?: string;
-    priceRange?: string;
-    departureRange?: string;
-    destination?: string;
-    message: string;
+    priceRange: string;
+    departureRange: string;
+    destination: string;
+    message?: string;
 
-    constructor( firstName: string, lastName: string, email: string, message: string, phone?: string, priceRange?: string, departureRange?: string, destination?: string) {
+    constructor( firstName: string, lastName: string, email: string, priceRange: string, departureRange: string, destination: string, phone?: string, message?: string,) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -87,17 +87,16 @@ export default class FormResponse {
         if (!priceRange) throw new Error("La fourchette de prix est requise");
         if (!departureRange) throw new Error("La période de départ est requise");
         if (!destination) throw new Error("La destination est requise");
-        if (!message) throw new Error("Le message est requis");
 
         return new FormResponse(
             firstPageData.firstName,
             firstPageData.lastName,
             firstPageData.email,
-            message,
-            firstPageData.phone,
             priceRange,
             departureRange,
-            destination
+            destination,
+            firstPageData.phone,
+            message
         );
   }
 
