@@ -73,6 +73,9 @@ export default function useForms({ showCookies, requestConsent }: UseFormsArgs) 
 
         if(showCookies === CookieConsent.UNSET){
             setIsLoading(false);
+            trackEvent(TrackingEvent.FORM_PENDING_CONSENT, {
+                email: formResponse.email,
+            });
             requestConsent((consent) => {
                 setIsLoading(true);
                 sendFormData(formResponse, consent);

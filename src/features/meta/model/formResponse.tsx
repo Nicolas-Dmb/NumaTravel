@@ -109,9 +109,9 @@ export default class FormResponse {
             phone: this.phone,
             message: this.message,
             priceRange: this.priceRange,
-            metaEventId: metaEventId,
             departureRange: this.departureRange,
             destination: this.destination,
+            metaEventId: metaEventId,
             fbp: fbp,
             fbc: fbc,
         }
