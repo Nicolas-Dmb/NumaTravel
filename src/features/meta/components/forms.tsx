@@ -62,7 +62,7 @@ export default function ContactForm({
         className="rounded-2xl shadow-md p-6 flex flex-col gap-5 bg-white"
       >
         <h2 className="text-xl font-semibold text-center">
-          Parlez-moi de votre projet, de vos envies ou posez-moi vos questions !
+          Parlons de votre voyage !
         </h2>
 
         <div className={currentPage === 1 ? "flex flex-col gap-5" : "hidden"}>
@@ -218,7 +218,7 @@ function SecondPage({ hasUserInteracted }: { hasUserInteracted: () => void }) {
       </fieldset>
 
       <fieldset className="flex flex-col gap-2">
-        <legend className="text-sm mb-2">Budget approximatif pour le voyage (hors honoraires) ?</legend>
+        <legend className="text-sm mb-2">Budget approximatif pour le voyage ?</legend>
         {BUDGET_OPTIONS.map((option, index) => (
           <label key={option} className="flex items-center gap-2 cursor-pointer">
             <input
