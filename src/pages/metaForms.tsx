@@ -51,9 +51,9 @@ export default function MetaContact({ setMetaRoutes, error, handleSubmit, isLoad
                 ME CONTACTER
             </button>
             <div className="min-h-screen bg-numa-white">
-                <div className="bg-numa-black text-numa-white font-cormorant text-center py-16 px-4">
-                    <h1 className="text-[22px] font-bold sm:text-[30px] lg:text-[30px] pt-5 lg:px-40 xl:px-72">
-                        Travel Planner indépendant. Je conçois des voyages sur mesure — itinéraire, vols, logements, expériences locales — pour celles et ceux qui veulent un voyage vraiment unique.
+                <div className="bg-numa-black text-numa-white font-poppins text-center py-16 px-4">
+                    <h1 className="text-[22px] sm:text-[30px] lg:text-[30px] pt-5 lg:px-40 xl:px-72">
+                        Certains voyages ne s’improvisent pas. Les tiens non plus.
                     </h1>
                 </div>
                 <FourthLayer isWhiteBackground={true} />
