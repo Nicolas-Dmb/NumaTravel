@@ -264,4 +264,28 @@ export const destinations: Destination[] = [
       "/album/sumbawa/sumbawa_7.webp",
     ],
   },
+  {
+    id: "edimbourg",
+    name: "Édimbourg",
+    x: 455,
+    y: 110,
+    photos: [
+      "/album/edimbourg/edimbourg_1.webp",
+      "/album/edimbourg/edimbourg_2.webp",
+      "/album/edimbourg/edimbourg_3.webp",
+      "/album/edimbourg/edimbourg_4.webp",
+    ],
+  },
+  {
+    id: "new_york",
+    name: "New York",
+    x: 297,
+    y: 148,
+    photos: [
+      "/album/new_york/new_york_1.webp",
+      "/album/new_york/new_york_2.webp",
+      "/album/new_york/new_york_3.webp",
+      "/album/new_york/new_york_4.webp",
+    ],
+  },
 ];
