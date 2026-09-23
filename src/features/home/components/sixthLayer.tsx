@@ -6,34 +6,34 @@ export default function SixthLayer() {
 
   const steps = [
     {
-      title: "Premier échange",
+      title: "Parlons de votre projet",
       description:
-        "Un appel téléphonique ou en visio pour comprendre vos envies, vos attentes, votre budget et votre façon de voyager.",
+        "Un premier échange pour comprendre ce que vous recherchez : votre façon de voyager, vos envies, votre budget, vos contraintes et les expériences que vous aimeriez vivre en Indonésie.",
     },
     {
-      title: "Analyse et devis personnalisé",
+      title: "Je construis votre projet",
       description:
-        "Suite à notre échange, je vous envoie un devis personnalisé, une estimation budgétaire et une brochure d’activités phares de la destination.",
+        "À partir de notre échange, je vous propose un projet personnalisé et une estimation du budget de votre voyage.",
     },
     {
-      title: "Conception de l’itinéraire",
+      title: "Votre itinéraire prend forme",
       description:
-        "Création d’un itinéraire sur mesure incluant les grandes étapes du voyage et les recommandations principales.",
+        "Je construis votre parcours étape par étape, en réfléchissant aux temps de trajet, aux transferts et à l’équilibre entre découverte, repos et expériences.",
     },
     {
-      title: "Sélection des vols et hébergements",
+      title: "Je sélectionne les bonnes adresses",
       description:
-        "Recherche et conseils pour les vols et les logements les plus adaptés à votre itinéraire et à vos critères.",
+        "Vols, hébergements, guides, activités et expériences : je recherche les options les plus adaptées à votre voyage.",
     },
     {
-      title: "Recommandation des activités et carnet de voyage",
+      title: "Vous recevez votre carnet de voyage",
       description:
-        "Suggestions d’activités et d’expériences, puis création d’un carnet de voyage personnalisé regroupant toutes les informations utiles.",
+        "Toutes vos informations sont regroupées dans un carnet personnalisé pour vous accompagner avant et pendant votre séjour.",
     },
     {
-      title: "Suivi avant et pendant le voyage",
+      title: "Je reste à vos côtés",
       description:
-        "Accompagnement jusqu’au départ et assistance pendant votre séjour pour vous permettre de voyager en toute sérénité.",
+        "Une question avant le départ ? Un doute pendant le voyage ? Vous pouvez me contacter pour être accompagné tout au long de votre aventure.",
     },
   ];
 

@@ -23,9 +23,9 @@ export default function FourthLayer({ isWhiteBackground }: FourthLayerProps) {
 
           <div className="flex w-full px-0 md:px-24 xl:px-0 flex-col text-center xl:text-left xl:pt-16 xl:justify-between">
             <div className="space-y-6 font-poppins text-[15px] leading-relaxed sm:text-[18px] lg:text-[19px] lg:leading-[1.8]">
-              <p>Le voyage a toujours occupé une place importante dans ma vie, autant pour la découverte que pour les expériences humaines qu’il permet. J’ai eu la chance de voyager dès mon plus jeune âge et, au fil des années, j’ai pu mettre un pied dans près de 20 pays, chacun m’apportant une vision différente du monde et des cultures. L'Asie, en particulier, est devenue ma région de cœur. J'y ai voyagé plusieurs fois et je continue d'y retourner — c'est là que je sais aller chercher les expériences que les guides ne mentionnent jamais.</p>
-              <p>Aujourd’hui, j’accompagne des voyageurs qui souhaitent partir l’esprit léger, en les aidant à structurer leurs idées et à donner forme à leur projet de voyage.</p>
-              <p>Mon approche est basée sur l’écoute, la personnalisation et la simplicité, afin de proposer des voyages qui ont du sens et qui vous ressemblent.</p>
+              <p>L’Indonésie occupe une place particulière dans ma vie. J’y voyage depuis 2018 et j’ai eu l’occasion d’explorer différentes îles du pays : Bali, Lombok, les îles Gili, Sumba, Sumbawa, Sumatra et Raja Ampat.</p>
+              <p>Mon lien avec l’Indonésie est également personnel : mon frère vivant en Indonésie, j’ai aussi eu l’occasion de découvrir le pays autrement et de m’y sentir progressivement comme chez moi. Au fil de mes voyages, j’ai créé des liens avec des locaux, des guides, des personnes rencontrées sur place, et découvert des adresses et des endroits loin des itinéraires les plus classiques. Je connais les réalités d’un voyage en Indonésie : les distances, les transferts entre les îles, les différentes façons de se déplacer, les particularités de chaque région et les petits détails qui peuvent faire toute la différence une fois sur place.</p>
+              <p><span className="font-semibold">C’est cette connaissance du terrain que je souhaite aujourd’hui mettre au service de vos voyages.</span> Je ne cherche pas à vous faire visiter « toute l’Indonésie ». Je cherche à construire <span className="font-semibold">la vôtre</span>.</p>
             </div>
 
             <div className="mt-10 w-fit bg-numa-black px-6 py-2 mx-auto ml-[30vw] md:ml-[40vw] xl:ml-0 xl:mx-0 xl:self-end">
