@@ -5,7 +5,7 @@ export default function FifthLayer() {
 
   const text = `Organiser un voyage en Indonésie peut rapidement devenir un véritable casse-tête : des milliers d’îles, des transports parfois complexes, des temps de trajet difficiles à anticiper et une multitude d’hébergements et d’activités à comparer. Mon rôle est de vous faire gagner du temps et de vous éviter les mauvaises surprises, grâce à une connaissance concrète de la destination.`;
   const text2 =
-    "Je ne réserve pas votre voyage à votre place : je vous conseille, je construis votre itinéraire et je vous donne toutes les clés pour l’organiser vous-même, en toute liberté.";
+    "La différence avec une agence de voyage ? Vous réservez et payez directement vos prestations. Je ne réserve pas à votre place : je vous conseille, recherche et sélectionne les meilleures options pour votre projet, puis je rassemble toutes les informations dans un carnet de voyage personnalisé.";
 
   return (
     <section className="bg-numa-white text-center xl:min-h-screen pt-10 pb-10 xl:pb-0">

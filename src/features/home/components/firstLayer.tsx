@@ -57,7 +57,7 @@ export default function FirstLayer() {
             <h1 className="text-[40px] lg:text-[70px] xl:text-[92.8px] mb-4 font-poppins">
             NUMA TRAVEL
             </h1>
-            <p className="text-[24px] font-cormorant">TRAVEL PLANNER</p>
+            <p className="text-[24px] font-cormorant">TRAVEL PLANNER INDONÉSIE</p>
 
             <button onClick={()=> navigate("/explorer")} className="border border-white mt-6 px-14 py-2 font-delicious text-white rounded hover:bg-white/10 transition">
             EXPLORE
