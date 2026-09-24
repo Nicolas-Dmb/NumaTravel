@@ -8,7 +8,7 @@ export default function SixthLayer() {
     {
       title: "On échange",
       description:
-        "Un premier appel pour comprendre votre projet : votre façon de voyager, vos contraintes et ce que vous voulez vivre en Indonésie. J’en ressors une direction et une estimation de budget.",
+        "Un premier appel pour cerner votre projet et votre façon de voyager. J’en ressors une direction et un budget estimé.",
     },
     {
       title: "Je construis votre voyage",
@@ -23,7 +23,7 @@ export default function SixthLayer() {
   ];
 
   return (
-    <section id="accompagnement" className="bg-numa-white text-center lg:min-h-screen px-4 py-5 pb-16">
+    <section id="accompagnement" className="bg-numa-white text-center px-4 py-5 pb-16">
       <h1 className="font-cormorant text-[40px] font-bold text-numa-red lg:text-[55px]">
         Votre voyage, étape par étape
       </h1>
@@ -93,7 +93,7 @@ export function TicketCard({ title, description }: PropsCard) {
           bg-numa-black text-numa-white
           aspect-square
           md:w-full md:max-w-none
-        `+ (title ? " w-[80vw] max-w-[360px] p-4 " : " w-[20vw] h-[40vh] p-8 ")}
+        `+ (title ? " w-[80vw] max-w-[360px] p-4 " : " w-[20vw] h-[32vh] p-8 ")}
       >
         <span className="absolute -top-5 -left-5 h-10 w-10 rounded-full bg-numa-white" />
         <span className="absolute -top-5 -right-5 h-10 w-10 rounded-full bg-numa-white" />

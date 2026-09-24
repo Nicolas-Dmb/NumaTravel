@@ -21,7 +21,7 @@ export default function FifthLayer() {
           </div>
         </div>
 
-        <div className="row-start-2 col-start-2 flex justify-start relative z-10 -translate-y-24">
+        <div className="row-start-2 col-start-2 flex justify-start relative z-10 -translate-y-32">
           <div className="w-full max-w-xl pr-8">
             <TicketCard title={null} description={text2} />
           </div>

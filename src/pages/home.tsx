@@ -23,6 +23,12 @@ export default function Home() {
         <section id="fourth-layer"><FourthLayer isWhiteBackground={false} /></section>
         <section id="panoramic-layer"><PanoramicLayer /></section>
         <section id='travel-planner'><FifthLayer /></section>
+
+        <div className="h-5 bg-numa-red"/>
+        <div className="h-5 bg-numa-black"/>
+        <div className="h-5 bg-numa-red"/>
+        <div className="h-5 bg-numa-black"/>
+
         <section id="sixth-layer"><SixthLayer /></section>
       </main>
     </>
