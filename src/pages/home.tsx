@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <SEO
-        title="Numa Travel | Travel planner"
-        description="Travel planner indépendante, Numa Travel conçoit des voyages sur mesure en France et à l’étranger, adaptés à votre budget et à vos envies."
+        title="Numa Travel | Travel planner Indonésie"
+        description="Travel planner indépendante spécialisée Indonésie, Numa Travel conçoit des voyages sur mesure de Bali à Raja Ampat, adaptés à votre budget et à vos envies."
         canonicalPath="/"
       />
       <main>
@@ -23,12 +23,6 @@ export default function Home() {
         <section id="fourth-layer"><FourthLayer isWhiteBackground={false} /></section>
         <section id="panoramic-layer"><PanoramicLayer /></section>
         <section id='travel-planner'><FifthLayer /></section>
-
-        <div className="h-5 bg-numa-red"/>
-        <div className="h-5 bg-numa-black"/>
-        <div className="h-5 bg-numa-red"/>
-        <div className="h-5 bg-numa-black"/>
-
         <section id="sixth-layer"><SixthLayer /></section>
       </main>
     </>

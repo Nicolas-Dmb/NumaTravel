@@ -8,7 +8,7 @@ export default function FifthLayer() {
     "La différence avec une agence de voyage ? Vous réservez et payez directement vos prestations. Je ne réserve pas à votre place : je vous conseille, recherche et sélectionne les meilleures options pour votre projet, puis je rassemble toutes les informations dans un carnet de voyage personnalisé.";
 
   return (
-    <section className="bg-numa-white text-center xl:min-h-screen pt-10 pb-10 xl:pb-0">
+    <section className="bg-numa-white text-center pt-10 pb-10 xl:pb-16">
       <h1 className="font-cormorant text-[40px] font-bold text-numa-red lg:text-[55px] px-4">
         Pourquoi faire appel à Numa Travel ?
       </h1>

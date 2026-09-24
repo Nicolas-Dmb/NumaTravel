@@ -6,34 +6,19 @@ export default function SixthLayer() {
 
   const steps = [
     {
-      title: "Parlons de votre projet",
+      title: "On échange",
       description:
-        "Un premier échange pour comprendre ce que vous recherchez : votre façon de voyager, vos envies, votre budget, vos contraintes et les expériences que vous aimeriez vivre en Indonésie.",
+        "Un premier appel pour comprendre votre projet : votre façon de voyager, vos contraintes et ce que vous voulez vivre en Indonésie. J’en ressors une direction et une estimation de budget.",
     },
     {
-      title: "Je construis votre projet",
+      title: "Je construis votre voyage",
       description:
-        "À partir de notre échange, je vous propose un projet personnalisé et une estimation du budget de votre voyage.",
+        "Itinéraire étape par étape, transferts entre les îles, sélection des vols, des hébergements et des adresses. Vous validez au fur et à mesure.",
     },
     {
-      title: "Votre itinéraire prend forme",
+      title: "Vous partez, je reste joignable",
       description:
-        "Je construis votre parcours étape par étape, en réfléchissant aux temps de trajet, aux transferts et à l’équilibre entre découverte, repos et expériences.",
-    },
-    {
-      title: "Je sélectionne les bonnes adresses",
-      description:
-        "Vols, hébergements, guides, activités et expériences : je recherche les options les plus adaptées à votre voyage.",
-    },
-    {
-      title: "Vous recevez votre carnet de voyage",
-      description:
-        "Toutes vos informations sont regroupées dans un carnet personnalisé pour vous accompagner avant et pendant votre séjour.",
-    },
-    {
-      title: "Je reste à vos côtés",
-      description:
-        "Une question avant le départ ? Un doute pendant le voyage ? Vous pouvez me contacter pour être accompagné tout au long de votre aventure.",
+        "Vous recevez votre carnet de voyage personnalisé, et vous pouvez me contacter avant le départ comme pendant le séjour.",
     },
   ];
 
