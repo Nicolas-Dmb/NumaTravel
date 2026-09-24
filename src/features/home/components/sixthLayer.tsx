@@ -91,9 +91,8 @@ export function TicketCard({ title, description }: PropsCard) {
         className={`
           relative mx-auto
           bg-numa-black text-numa-white
-          aspect-square
           md:w-full md:max-w-none
-        `+ (title ? " w-[80vw] max-w-[360px] p-4 " : " w-[20vw] h-[40vh] p-8 ")}
+        `+ (title ? " aspect-square w-[80vw] max-w-[360px] p-4 " : " w-[20vw] p-6 ")}
       >
         <span className="absolute -top-5 -left-5 h-10 w-10 rounded-full bg-numa-white" />
         <span className="absolute -top-5 -right-5 h-10 w-10 rounded-full bg-numa-white" />
@@ -111,7 +110,7 @@ export function TicketCard({ title, description }: PropsCard) {
                   <div className="h-1 w-[20vw] md:w-[5vw] bg-numa-white mx-auto "></div>
                 </div>
             )}
-          <p className={`font-cormorant text-[20px] md:text-[22px] lg:text-[26px] xl:text-[22px] leading-snug px-2 whitespace-pre-line md:text-justify`+ (title ? " h-[6em]" : "")}>
+          <p className={`font-cormorant leading-snug px-2 whitespace-pre-line md:text-justify `+ (title ? "text-[20px] md:text-[22px] lg:text-[26px] xl:text-[22px] h-[6em]" : "text-[18px] xl:text-[18px]")}>
             {description}
           </p>
         </div>
