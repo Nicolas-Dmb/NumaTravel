@@ -14,42 +14,42 @@ export default function ThirdLayer(){
 
     const itineraryCard =
     <Card
-        title="01 — Itinéraire sur mesure"
+        title="ITINÉRAIRE SUR MESURE"
         description="Un itinéraire pensé selon vos envies, votre rythme et les régions d’Indonésie qui vous correspondent."
         img={itineraire}
         alt="photo pour illustrer les itinéraires"
     />
     const flyCard =
     <Card
-        title="02 — Vols & transports"
+        title="VOLS & TRANSPORTS"
         description="Je vous aide à organiser vos déplacements entre les îles et à trouver les options adaptées à votre voyage."
         img={vols}
         alt="photo pour illustrer les vols"
     />
     const hotelCard =
     <Card
-        title="03 — Hébergements"
+        title="HÉBERGEMENTS"
         description="Des adresses sélectionnées selon votre budget, votre style de voyage et l’emplacement idéal pour chaque étape."
         img={logements}
         alt="photo pour illustrer les logements"
     />
     const activityCard =
     <Card
-        title="04 — Activités & expériences"
+        title="ACTIVITÉS & EXPÉRIENCES"
         description="Des expériences choisies selon vos envies, avec des adresses et contacts locaux que je peux vous recommander."
         img={activites}
         alt="photo pour illustrer les activités"
     />
     const guideCard =
     <Card
-        title="05 — Carnet de voyage"
+        title="CARNET DE VOYAGE"
         description="Toutes les informations essentielles de votre voyage réunies dans un carnet personnalisé."
         img={carnet}
         alt="photo pour illustrer le carnet de voyage"
     />
     const supportCard =
     <Card
-        title="06 — Assistance"
+        title="ASSISTANCE"
         description="Je reste disponible avant et pendant votre voyage pour vous accompagner en cas de question ou d’imprévu."
         img={assistance}
         alt="photo pour illustrer l'assistance voyage"

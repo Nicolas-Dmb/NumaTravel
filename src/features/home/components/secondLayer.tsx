@@ -9,7 +9,7 @@ export default function SecondLayer(){
                     L’Indonésie autrement, pensée pour vous.
                 </h1>
                 <div className="mb-6 h-1 w-[20vw] mt-4 bg-numa-red mx-auto"></div>
-                <p className="mb-0 px-5 md:px-0 md:mb-6 max-w-lg font-poppins text-[12px] md:text-[18px]">
+                <p className="mb-0 px-5 md:px-0 md:mb-6 max-w-lg mx-auto font-poppins text-[12px] md:text-[18px]">
                     De Bali aux îles oubliées de Sumbawa, de la jungle de Sumatra aux
                     eaux de Raja Ampat, je conçois des voyages sur mesure en Indonésie,
                     adaptés à votre rythme, vos envies et votre budget.
