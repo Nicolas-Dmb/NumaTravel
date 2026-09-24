@@ -93,7 +93,7 @@ export function TicketCard({ title, description }: PropsCard) {
           bg-numa-black text-numa-white
           aspect-square
           md:w-full md:max-w-none
-        `+ (title ? " w-[80vw] max-w-[360px] p-4 " : " w-[20vw] h-[32vh] p-8 ")}
+        `+ (title ? " w-[80vw] max-w-[360px] p-4 " : " w-[20vw] h-[36vh] p-8 ")}
       >
         <span className="absolute -top-5 -left-5 h-10 w-10 rounded-full bg-numa-white" />
         <span className="absolute -top-5 -right-5 h-10 w-10 rounded-full bg-numa-white" />
