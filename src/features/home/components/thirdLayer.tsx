@@ -12,45 +12,45 @@ export default function ThirdLayer(){
     
     const { islaptop, istouchpad } = useDevice();
 
-    const itineraryCard = 
+    const itineraryCard =
     <Card
-        title="ITINERAIRES"
-        description="Des parcours personnalisés, pensés selon vos envies, votre rythme et votre style de voyage."
+        title="ITINÉRAIRE SUR MESURE"
+        description="Un itinéraire construit autour des régions d’Indonésie qui vous correspondent, et du temps dont vous disposez."
         img={itineraire}
         alt="photo pour illustrer les itinéraires"
     />
-    const flyCard = 
+    const flyCard =
     <Card
-        title="VOLS"
-        description="Sélection des meilleures options de vols en fonction de vos dates, de votre budget et de vos priorités."
+        title="VOLS & TRANSPORTS"
+        description="Je vous aide à organiser vos déplacements entre les îles et à trouver les options adaptées à votre voyage."
         img={vols}
         alt="photo pour illustrer les vols"
     />
     const hotelCard =
     <Card
-        title="LOGEMENTS"
-        description="Recommandation d’hébergements adaptés à votre voyage, entre confort, emplacement et authenticité."
+        title="HÉBERGEMENTS"
+        description="Des adresses sélectionnées selon votre budget, votre style de voyage et l’emplacement idéal pour chaque étape."
         img={logements}
         alt="photo pour illustrer les logements"
     />
     const activityCard =
     <Card
-        title="ACTIVITÉS"
-        description="Suggestions d’activités et d’expériences en accord avec vos centres d’intérêt et la destination."
+        title="ACTIVITÉS & EXPÉRIENCES"
+        description="Des expériences choisies selon vos envies, avec des adresses et contacts locaux que je peux vous recommander."
         img={activites}
         alt="photo pour illustrer les activités"
     />
     const guideCard =
     <Card
         title="CARNET DE VOYAGE"
-        description="Un guide complet et personnalisé regroupant toutes les informations utiles pour voyager sereinement."
+        description="Toutes les informations essentielles de votre voyage réunies dans un carnet personnalisé."
         img={carnet}
         alt="photo pour illustrer le carnet de voyage"
     />
     const supportCard =
     <Card
-        title="ASSISTANCE VOYAGE"
-        description="Un accompagnement avant et pendant le voyage pour vous conseiller et vous aider en cas de besoin."
+        title="ASSISTANCE"
+        description="Je reste disponible avant et pendant votre voyage pour vous accompagner en cas de question ou d’imprévu."
         img={assistance}
         alt="photo pour illustrer l'assistance voyage"
     />
