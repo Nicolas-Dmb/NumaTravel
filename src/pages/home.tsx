@@ -3,6 +3,7 @@ import SecondLayer from '../features/home/components/secondLayer';
 import ThirdLayer from '../features/home/components/thirdLayer';
 import FourthLayer from '../features/home/components/fourthLayer';
 import PanoramicLayer from '../features/home/components/panoramicLayer';
+import WhyIndonesiaLayer from '../features/home/components/whyIndonesiaLayer';
 import FifthLayer from '../features/home/components/fifthLayer';
 import SixthLayer from '../features/home/components/sixthLayer';
 import SEO from '../components/SEO';
@@ -22,6 +23,7 @@ export default function Home() {
         <section id="services-voyages"><ThirdLayer /></section>
         <section id="fourth-layer"><FourthLayer isWhiteBackground={false} /></section>
         <section id="panoramic-layer"><PanoramicLayer /></section>
+        <section id="pourquoi-indonesie"><WhyIndonesiaLayer /></section>
         <section id='travel-planner'><FifthLayer /></section>
 
         <div className="h-5 bg-numa-red"/>
