@@ -43,7 +43,7 @@ function StepsList({ steps }: { steps: { title: string; description: string }[] 
           <p className="font-poppins text-[26px] font-bold text-numa-red">
             {String(i + 1).padStart(2, "0")}
           </p>
-          <h2 className="mt-1 font-cormorant text-[24px] font-bold text-numa-black lg:text-[26px]">
+          <h2 className="mt-1 font-cormorant text-[24px] font-bold leading-tight text-numa-black lg:min-h-[2.5em] lg:text-[26px]">
             {s.title}
           </h2>
           <p className="mt-3 font-poppins text-[15px] leading-relaxed text-numa-black lg:text-[16px]">
