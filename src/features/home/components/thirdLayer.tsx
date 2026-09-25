@@ -15,7 +15,7 @@ export default function ThirdLayer(){
     const itineraryCard =
     <Card
         title="ITINÉRAIRE SUR MESURE"
-        description="Un itinéraire pensé selon vos envies, votre rythme et les régions d’Indonésie qui vous correspondent."
+        description="Un itinéraire construit autour des régions d’Indonésie qui vous correspondent, et du temps dont vous disposez."
         img={itineraire}
         alt="photo pour illustrer les itinéraires"
     />
