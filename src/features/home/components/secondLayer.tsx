@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import beachLayer2 from '../assets/beachLayer2.webp';
 
 export default function SecondLayer(){
@@ -14,6 +15,12 @@ export default function SecondLayer(){
                     eaux de Raja Ampat, je conçois des voyages sur mesure en Indonésie,
                     adaptés à votre rythme, vos envies et votre budget.
                 </p>
+                <Link
+                    to="/contact"
+                    className="mt-6 inline-block rounded bg-numa-red px-14 py-2 font-poppins text-[14px] text-numa-white transition hover:bg-numa-red/90 md:text-[18px]"
+                >
+                    Créer mon voyage
+                </Link>
             </div>
             <div className="w-full lg:w-auto">
                 <img
