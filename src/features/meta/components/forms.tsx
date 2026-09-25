@@ -152,7 +152,7 @@ function FirstPage({ phone, setPhone, hasUserInteracted }: FirstPageProps) {
         </div>
 
         <div className="flex flex-col">
-          <label className="text-sm mb-1">Téléphone (optionnel)</label>
+          <label className="text-sm mb-1">Téléphone</label>
           <div className="border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-numa-black transition">
             <PhoneInput
               international
@@ -195,7 +195,7 @@ function SecondPage({ hasUserInteracted }: { hasUserInteracted: () => void }) {
           type="text"
           name="destination"
           required
-          placeholder="Ex : Japon, Amérique du Sud, Indonésie, pas encore décidé..."
+          placeholder="Ex : Bali, Lombok, Sumatra, Raja Ampat, pas encore décidé..."
           className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-numa-black transition"
         />
       </div>
