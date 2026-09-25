@@ -134,9 +134,9 @@ function MoreSections({ isTouchpad, setSeeMore, seeMore, scrollDirection }: More
     <div className={`fixed top-0 left-0 w-full bg-[#ebe6e277] z-50 backdrop-blur-sm shadow-lg pb-8 px-8 ${seeMore ? "block" : "hidden"} transition-transform duration-300 ${scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"}`}>
       <img src={close} alt="Close options" className={`cursor-pointer float-right mt-4 ${isTouchpad ? "w-5 h-5" : "w-5 h-5"}`} onClick={() => setSeeMore(false)} />
       <div className="flex flex-col gap-4 pt-16 items-center" onClick={()=> setSeeMore(false)}>
-        <Link onClick={() => scrollToHash("#services-voyages")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#services-voyages">QUI SUIS-JE ?</Link>
-        <Link onClick={() => scrollToHash("#travel-planner")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">MES SERVICES VOYAGES</Link>
-        <Link onClick={() => scrollToHash("#travel-planner")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">TRAVEL PLANNER</Link>
+        <Link onClick={() => scrollToHash("#fourth-layer")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#fourth-layer">QUI SUIS-JE ?</Link>
+        <Link onClick={() => scrollToHash("#services-voyages")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#services-voyages">MES SERVICES VOYAGES</Link>
+        <Link onClick={() => scrollToHash("#travel-planner")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#travel-planner">POURQUOI NUMA TRAVEL</Link>
         <Link onClick={() => scrollToHash("#accompagnement")} className={isTouchpad ? touchPadStyle : mobileStyle} to="/#accompagnement">ACCOMPAGNEMENT</Link>
       </div>
     </div>
@@ -171,7 +171,7 @@ function LaptopServices({ displayServices, close, scrollDirection }: LaptopServi
         `}
       >
         <Link onClick={() => scrollToHash("#services-voyages")} className={subButtonStyle + " block px-5 py-3"} to="/#services-voyages">MES SERVICES VOYAGES</Link>
-        <Link onClick={() => scrollToHash("#travel-planner")} className={subButtonStyle + " block px-5 py-3"} to="/#travel-planner">TRAVEL PLANNER</Link>
+        <Link onClick={() => scrollToHash("#travel-planner")} className={subButtonStyle + " block px-5 py-3"} to="/#travel-planner">POURQUOI NUMA TRAVEL</Link>
         <Link onClick={() => scrollToHash("#accompagnement")} className={subButtonStyle + " block px-5 py-3"} to="/#accompagnement">ACCOMPAGNEMENT</Link>
       </div>
     </div>

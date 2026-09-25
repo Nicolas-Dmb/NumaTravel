@@ -13,9 +13,9 @@ export class FistPageResponse {
     firstName: string;
     lastName: string;
     email: string
-    phone?: string;
+    phone: string;
 
-    constructor(firstName: string, lastName: string, email: string, phone?: string) {
+    constructor(firstName: string, lastName: string, email: string, phone: string) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -39,17 +39,17 @@ export class FistPageResponse {
             throw new Error("Format d'email invalide");
         }
 
-        if (phone && !/^\+\d{6,15}$/.test(phone)) {
+        if (!phone) throw new Error("Le téléphone est requis");
+
+        if (!/^\+\d{6,15}$/.test(phone)) {
             throw new Error("Format de téléphone invalide");
         }
-
-        const normalizedPhone = phone || undefined;
 
         return new FistPageResponse(
             firstName,
             lastName,
             email,
-            normalizedPhone
+            phone
         );
     }
 }
