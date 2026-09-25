@@ -3,6 +3,7 @@ import useDevice from "../../../hook/useDevice";
 
 export default function SixthLayer() {
   const { islaptop, istouchpad } = useDevice();
+  const isMobile = !islaptop && !istouchpad;
 
   const steps = [
     {
@@ -29,26 +30,28 @@ export default function SixthLayer() {
       </h1>
       <div className="h-1 w-[30vw] bg-numa-red mx-auto mt-4 mb-6 lg:mb-10"></div>
 
-      {!islaptop && !istouchpad && (
-        <MobileCardLayout steps={steps} />
-      )}
-
-      {istouchpad && (
-        <div className="mx-auto max-w-5xl grid grid-cols-2 gap-6">
-          {steps.map((s) => (
-            <TicketCard key={s.title} title={s.title} description={s.description} />
-          ))}
-        </div>
-      )}
-
-      {islaptop && (
-        <div className="mx-auto max-w-6xl grid grid-cols-3 gap-8">
-          {steps.map((s) => (
-            <TicketCard key={s.title} title={s.title} description={s.description} />
-          ))}
-        </div>
-      )}
+      {isMobile ? <MobileCardLayout steps={steps} /> : <StepsList steps={steps} />}
     </section>
+  );
+}
+
+function StepsList({ steps }: { steps: { title: string; description: string }[] }) {
+  return (
+    <div className="mx-auto max-w-6xl flex flex-col divide-y divide-numa-black/20 lg:flex-row lg:divide-y-0 lg:divide-x">
+      {steps.map((s, i) => (
+        <div key={s.title} className="flex-1 px-8 py-8 lg:py-2">
+          <p className="font-poppins text-[26px] font-bold text-numa-red">
+            {String(i + 1).padStart(2, "0")}
+          </p>
+          <h2 className="mt-1 font-cormorant text-[24px] font-bold text-numa-black lg:text-[26px]">
+            {s.title}
+          </h2>
+          <p className="mt-3 font-poppins text-[15px] leading-relaxed text-numa-black lg:text-[16px]">
+            {s.description}
+          </p>
+        </div>
+      ))}
+    </div>
   );
 }
 
